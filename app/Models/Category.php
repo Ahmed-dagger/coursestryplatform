@@ -7,9 +7,9 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Category extends Model
+class Category extends Model implements TranslatableContract
 {
-    use HasFactory , Translatable,SoftDeletes;
+    use HasFactory , Translatable, SoftDeletes;
 
     protected $table = 'categories';
     // 2. To add translation methods
@@ -26,7 +26,5 @@ class Category extends Model
     {
         return $this->hasMany(CategoryTranslation::class);
     }
-
-    
 
 }

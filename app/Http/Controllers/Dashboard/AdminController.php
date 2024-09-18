@@ -70,10 +70,6 @@ class AdminController extends Controller implements AdminRepositoryInterface {
         {
             $admin->restore();
         }
-        
-        
-        
-
         return back()->with('success','Restored successfully');
     }
 }

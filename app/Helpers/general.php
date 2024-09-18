@@ -64,18 +64,13 @@ if (!function_exists('loadDashboardRoutes')) {
     }
 }
 
-/*
+
 if (!function_exists('loadcategories')) {
     function loadcategories($select=null)
     {
-        $categories = Category::selectRaw('name as text')
-        ->selectRaw('category_id as id')
-        ->selectRaw('parent as parent')
-        ->selectRaw('locale as locale')
-        ->where('locale',session('locale'))
-        ->get(['id','text','parent']);
+        $categories = Category::get();
 
-        
+        //  dd($categories);
         $category_arr = [];
 
         foreach($categories as $category)
@@ -95,7 +90,7 @@ if (!function_exists('loadcategories')) {
 
             $list_arr['id'] = $category->id;
             $list_arr['parent'] = $category->parent !==null ? $category->parent : '#';
-                $list_arr['text'] = $category->text;
+                $list_arr['text'] = $category->name;
             
             
             array_push($category_arr,$list_arr);
@@ -108,4 +103,4 @@ if (!function_exists('loadcategories')) {
         
     }
 }
-*/
+
