@@ -56,7 +56,7 @@ class CoursesController extends Controller implements CourseRepositoryInterface
 
         
 
-        return redirect()->route('admin.courses.index')->with('success', 'Admin created successfully.');
+        return redirect()->route('admin.courses.index')->with('success', 'Course created successfully.');
     }
 
 }

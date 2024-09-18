@@ -56,7 +56,7 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
             
         ]);
 
-        return redirect()->route('admin.playlist.playlists.index')->with('success', 'Admin created successfully.');
+        return redirect()->route('admin.playlist.playlists.index')->with('success', 'Playlist created successfully.');
     }
 
     public function destroy($id)
