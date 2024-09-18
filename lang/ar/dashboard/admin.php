@@ -8,4 +8,5 @@ return [
     'desc'                             =>                       'الوصف',
     'courses'                             =>                       'الكورسات',
     'price'                             =>                       'السعر',
+    'playlist'                             =>                       'playlist',
 ];

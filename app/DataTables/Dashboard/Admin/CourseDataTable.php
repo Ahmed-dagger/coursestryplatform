@@ -14,22 +14,20 @@ use Yajra\DataTables\Utilities\Request as DataTableRequest;
 
 class CourseDataTable extends BaseDataTable
 {
-
-    protected function getParameters() {
+    protected function getParameters()
+    {
         $parameters = parent::getParameters();
-            $parameters['buttons'][] = [
-                'text' => "<i class='fa fa-trash'></i> " . trans('dashboard/datatable.deleted'),
-                'className' => 'btn btn-danger',
-                'action' => '
+        $parameters['buttons'][] = [
+            'text' => "<i class='fa fa-trash'></i> " . trans('dashboard/datatable.deleted'),
+            'className' => 'btn btn-danger',
+            'action' =>
+                '
                 function(e, dt, node, config) {
-                 window.location.href = "' . route('admin.admins.index' , ["filter"=>"deleted"]) . '"; } 
-                 '
-            ];
-        
-
-        
-
-        
+                 window.location.href = "' .
+                route('admin.admins.index', ['filter' => 'deleted']) .
+                '"; }
+                 ',
+        ];
         return $parameters;
     }
     public function __construct(DataTableRequest $request)
@@ -41,10 +39,10 @@ class CourseDataTable extends BaseDataTable
     public function dataTable($query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->addColumn('playlist_name', function (Course $course) {
-            // Access the related playlist's name
-            return $course->playlist_id ? $course->playlist->name : '-';
-        })
+            ->addColumn('playlist_name', function (Course $course) {
+                // Access the related playlist's name
+                return $course->playlist_id ? $course->playlist->name : '-';
+            })
             ->addColumn('action', function (Course $course) {
                 return view('dashboard.admin.courses.btn.actions', compact('course'));
             })
@@ -60,32 +58,28 @@ class CourseDataTable extends BaseDataTable
             ->editColumn('status', function (Course $course) {
                 return $this->formatStatus($course->status);
             })
-            ->rawColumns(['action', 'created_at', 'updated_at','deleted_at', 'status', 'name']);
+            ->rawColumns(['action', 'created_at', 'updated_at', 'deleted_at', 'status', 'name']);
     }
 
     public function query(): QueryBuilder
     {
-        
-
         return Course::query();
-
-
     }
 
     public function getColumns(): array
     {
         $playlist = Playlist::with('course')->get();
-        
+
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false,],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('dashboard/admin.name'),],
-            ['name' => 'desc', 'data' => 'desc', 'title' => trans('dashboard/admin.desc'),],
-            ['name' => 'price', 'data' => 'Price', 'title' => trans('dashboard/admin.price'),],
-            ['name' => 'playlist_name', 'data' => 'playlist_name', 'title' => trans('dashboard/admin.price'),],
-            ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('dashboard/general.created_at'), 'orderable' => false, 'searchable' => false,],
-            ['name' => 'updated_at', 'data' => 'updated_at', 'title' => trans('dashboard/general.updated_at'), 'orderable' => false, 'searchable' => false,],
-            ['name' => 'deleted_at', 'data' => 'deleted_at', 'title' => trans('dashboard/general.deleted_at'), 'orderable' => false, 'searchable' => false,],
-            ['name' => 'action', 'data' => 'action', 'title' => trans('dashboard/general.actions'), 'orderable' => false, 'searchable' => false,],
+            ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false],
+            ['name' => 'name', 'data' => 'name', 'title' => trans('dashboard/admin.name')],
+            ['name' => 'desc', 'data' => 'desc', 'title' => trans('dashboard/admin.desc')],
+            ['name' => 'price', 'data' => 'Price', 'title' => trans('dashboard/admin.price')],
+            ['name' => 'playlist_name', 'data' => 'playlist_name', 'title' => trans('dashboard/admin.playlist')],
+            ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('dashboard/general.created_at'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'updated_at', 'data' => 'updated_at', 'title' => trans('dashboard/general.updated_at'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'deleted_at', 'data' => 'deleted_at', 'title' => trans('dashboard/general.deleted_at'), 'orderable' => false, 'searchable' => false],
+            ['name' => 'action', 'data' => 'action', 'title' => trans('dashboard/general.actions'), 'orderable' => false, 'searchable' => false],
         ];
     }
 }
