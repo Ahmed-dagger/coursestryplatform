@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('playlist');
         Schema::create('playlist', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('desc');
-            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('category_id')
+                    ->nullable()
+                    ->constrained('categories')
+                    ->onDelete('cascade');
             $table->foreignId('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
@@ -27,6 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        
         Schema::dropIfExists('playlist');
     }
 };

@@ -186,6 +186,7 @@ return [
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -198,6 +199,7 @@ return [
         App\Providers\ObservableServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\SidebarServiceProvider::class,
+        
     ],
 
     /*

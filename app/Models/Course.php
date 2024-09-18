@@ -21,4 +21,12 @@ class Course extends Model implements HasMedia
              ->width(300)
              ->height(300);
     }
+
+    public function playlist()
+    {
+        return $this->belongsTo(Playlist::class, 'playlist_id');
+    }
+
+
+
 }

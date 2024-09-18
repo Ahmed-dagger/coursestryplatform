@@ -21,7 +21,6 @@ return new class extends Migration
             // Foreign key to the main model
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unique(['category_id', 'locale']);
-            $table->integer('parent')->unsigned()->nullable();
             // fields you want to translate
             $table->string('name');
         });

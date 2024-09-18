@@ -21,11 +21,19 @@ Route::group(
         Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('dashboard', Dashboard\DashboardController::class)->name('dashboard');
             Route::resource('admins', Dashboard\AdminController::class);
+            Route::get('show' , [Dashboard\AdminController::class , 'create'])->name('show');
+            Route::post('create' , [Dashboard\AdminController::class , 'store'])->name('create');
             Route::delete('destroy/{id}' , [Dashboard\AdminController::class , 'destroy'])->name('destroy');
             Route::post('resotre/{id}' , [Dashboard\AdminController::class , 'restore'])->name('restore');
             Route::resource('categories', Dashboard\CategoryController::class);
-            Route::resource('playlists', Dashboard\PlaylistController::class);
+            Route::group(['middleware' => 'auth:admin', 'prefix' => 'playlist', 'as' => 'playlist.'], function () {
+                Route::resource('playlists', Dashboard\PlaylistController::class);   
+            });
             Route::resource('courses', Dashboard\CoursesController::class);
         });
+
+        
+
+
         require __DIR__.'../../auth.php';
 });

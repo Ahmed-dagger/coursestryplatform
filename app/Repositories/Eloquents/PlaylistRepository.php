@@ -14,7 +14,9 @@ class PlaylistRepository implements PlaylistRepositoryInterface
         return $playlistDataTable->render('dashboard.Admin.playlists.index', ['pageTitle' => trans('dashboard/admin.playlists')]);
     }
 
-    public function store($request) {}
+    public function store($request) {
+        
+    }
 
     public function update($request) {}
 

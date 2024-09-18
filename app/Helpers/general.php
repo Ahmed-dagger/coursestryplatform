@@ -64,10 +64,11 @@ if (!function_exists('loadDashboardRoutes')) {
     }
 }
 
+/*
 if (!function_exists('loadcategories')) {
     function loadcategories($select=null)
     {
-        $categories = \App\Models\CategoryTranslation::selectRaw('name as text')
+        $categories = Category::selectRaw('name as text')
         ->selectRaw('category_id as id')
         ->selectRaw('parent as parent')
         ->selectRaw('locale as locale')
@@ -107,4 +108,4 @@ if (!function_exists('loadcategories')) {
         
     }
 }
-
+*/

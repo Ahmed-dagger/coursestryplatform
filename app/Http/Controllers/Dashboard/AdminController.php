@@ -27,6 +27,34 @@ class AdminController extends Controller implements AdminRepositoryInterface {
         return $admin;
     }
 
+    public function create()
+    {
+        return view('dashboard.Admin.admins.create', ['pageTitle' => trans('dashboard/admin.admins')]);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email',
+            'phone' => 'required|string|max:20',
+            'password' => 'required|string|min:6|confirmed', // Ensure passwords match
+            'status' => 'required|in:active,inactive',
+            'role' => 'required|in:Admin,Supervisor',
+        ]);
+
+        Admin::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => bcrypt($validated['password']), // Hash the password
+            'status' => $validated['status'],
+            'type' => $validated['role'],
+        ]);
+
+        return redirect()->route('admin.admins.index')->with('success', 'Admin created successfully.');
+    }
+
     public function destroy($id)
     {
         $admin = Admin::findOrFail($id);

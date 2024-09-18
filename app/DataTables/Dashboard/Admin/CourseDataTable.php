@@ -6,6 +6,7 @@ use App\Models\Admin;
 
 use App\DataTables\Base\BaseDataTable;
 use App\Models\Course;
+use App\Models\Playlist;
 use Flasher\Laravel\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -40,8 +41,12 @@ class CourseDataTable extends BaseDataTable
     public function dataTable($query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+        ->addColumn('playlist_name', function (Course $course) {
+            // Access the related playlist's name
+            return $course->playlist_id ? $course->playlist->name : '-';
+        })
             ->addColumn('action', function (Course $course) {
-                return view('dashboard.admin.admins.btn.actions', compact('admin'));
+                return view('dashboard.admin.courses.btn.actions', compact('course'));
             })
             ->editColumn('created_at', function (Course $course) {
                 return $this->formatBadge($this->formatDate(value: $course->created_at));
@@ -52,9 +57,6 @@ class CourseDataTable extends BaseDataTable
             ->editColumn('deleted_at', function (Course $course) {
                 return $this->formatBadge($this->formatDate($course->deleted_at));
             })
-            ->editColumn('name', function (Course $course) {
-                return '<a href="' . route('admin.admins.show', $course->profile->uuid) . '">' . $course->name . '</a>';
-            })
             ->editColumn('status', function (Course $course) {
                 return $this->formatStatus($course->status);
             })
@@ -63,16 +65,23 @@ class CourseDataTable extends BaseDataTable
 
     public function query(): QueryBuilder
     {
+        
+
         return Course::query();
+
+
     }
 
     public function getColumns(): array
     {
+        $playlist = Playlist::with('playlist')->get();
+        
         return [
             ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false,],
             ['name' => 'name', 'data' => 'name', 'title' => trans('dashboard/admin.name'),],
             ['name' => 'desc', 'data' => 'desc', 'title' => trans('dashboard/admin.desc'),],
             ['name' => 'price', 'data' => 'Price', 'title' => trans('dashboard/admin.price'),],
+            ['name' => 'playlist_name', 'data' => 'playlist_name', 'title' => trans('dashboard/admin.price'),],
             ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('dashboard/general.created_at'), 'orderable' => false, 'searchable' => false,],
             ['name' => 'updated_at', 'data' => 'updated_at', 'title' => trans('dashboard/general.updated_at'), 'orderable' => false, 'searchable' => false,],
             ['name' => 'deleted_at', 'data' => 'deleted_at', 'title' => trans('dashboard/general.deleted_at'), 'orderable' => false, 'searchable' => false,],

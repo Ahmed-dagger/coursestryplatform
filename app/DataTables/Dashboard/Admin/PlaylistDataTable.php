@@ -41,7 +41,7 @@ class PlaylistDataTable extends BaseDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function (Playlist $playlist) {
-                return view('dashboard.admin.admins.btn.actions', compact('admin'));
+                return view('dashboard.admin.playlists.btn.actions', compact('playlist'));
             })
             ->editColumn('created_at', function (Playlist $playlist) {
                 return $this->formatBadge($this->formatDate($playlist->created_at));
@@ -51,9 +51,6 @@ class PlaylistDataTable extends BaseDataTable
             })
             ->editColumn('deleted_at', function (Playlist $playlist) {
                 return $this->formatBadge($this->formatDate($playlist->deleted_at));
-            })
-            ->editColumn('name', function (Playlist $playlist) {
-                return '<a href="' . route('admin.admins.show', $playlist->profile->uuid) . '">' . $playlist->name . '</a>';
             })
             ->editColumn('status', function (Playlist $playlist) {
                 return $this->formatStatus($playlist->status);

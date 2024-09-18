@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->longText('desc');
             $table->unsignedInteger('Price');
-            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreignId('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
-            $table->foreignId('playlist_id')->references('id')->on('playlist')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('teacher_id')->nullable()->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreignId('playlist_id')->nullable()->references('id')->on('playlist')->onDelete('cascade');
             $table->timestamps();
         });
     }
