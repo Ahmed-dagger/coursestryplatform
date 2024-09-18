@@ -13,6 +13,9 @@ class Playlist extends Model
     protected $fillable = ['name','desc','category_id','teacher_id'];
 
 
-    
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    } 
 
 }
