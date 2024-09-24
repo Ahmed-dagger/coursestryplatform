@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\CourseRepositoryInterface;
 use App\DataTables\Dashboard\Admin\CourseDataTable;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Playlist;
 use App\Models\Teacher;
@@ -23,9 +24,9 @@ class CoursesController extends Controller implements CourseRepositoryInterface
 
     public function create()
     {
-        $playlists = Playlist::all();
+        $categories = Category::all();
         $teachers = Teacher::all();
-        return view('dashboard.Admin.courses.create', ['pageTitle' => trans('dashboard/admin.playlists')] , compact(['playlists','teachers']));
+        return view('dashboard.Admin.courses.create', ['pageTitle' => trans('dashboard/admin.playlists')] , compact(['categories','teachers']));
 
     }
 
@@ -36,7 +37,8 @@ class CoursesController extends Controller implements CourseRepositoryInterface
             'description' => 'required|string',
             'teacher_id' => 'required|exists:teachers,id',
             'image' => 'nullable|image', // Validate image
-            'Price'=>'required'
+            'Price'=>'required',
+            'category_id'=>'nullable'
         ]);
 
         
@@ -45,7 +47,8 @@ class CoursesController extends Controller implements CourseRepositoryInterface
             'name' => $validatedData['name'],
             'desc' => $validatedData['description'],
             'teacher_id' => $validatedData['teacher_id'],
-            'Price'=> $validatedData['Price']
+            'Price'=> $validatedData['Price'],
+            'category_id'=>$validatedData['category_id'],
         ]);
 
         if ($request->hasFile('image')) {

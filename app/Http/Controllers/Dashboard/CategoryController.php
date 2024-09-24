@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\DataTables\Dashboard\Admin\AdminDataTable;
 use App\Models\Category;
+use App\Models\CategoryTranslation;
 
 class CategoryController extends Controller implements CategoryRepositoryInterface
 {
@@ -30,18 +31,31 @@ class CategoryController extends Controller implements CategoryRepositoryInterfa
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000', // Adjust length if needed
-            
+            'parent' => 'nullable|exists:categories,id',
+            'name.ar' => 'required|string|max:255',
+            'name.en' => 'required|string|max:255',
+            'description.ar' => 'nullable|string|max:1000',
+            'description.en' => 'nullable|string|max:1000',
         ]);
-
-        // Create a new playlist record
-        Category::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'], 
+    
+        // Step 1: Create the Category (parent)
+        $category = Category::create([
+            'parent' => $request->input('parent'),
         ]);
-
-        return redirect()->route('admin.playlist.playlists.index')->with('success', 'Admin created successfully.');
+    
+        // Step 2: Add translations (CategoryTranslation)
+        foreach (['ar', 'en'] as $locale) {
+            CategoryTranslation::create([
+                'category_id' => $category->id,
+                'locale' => $locale,
+                'name' => $validated['name'][$locale],
+                'description' => $validated['description'][$locale] ?? null,
+            ]);
+        }
+    
+        // Redirect with success message
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category created successfully.');
     }
 
 

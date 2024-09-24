@@ -1,11 +1,10 @@
 @extends('dashboard.layouts.master')
 
 @section('css')
-
 @endsection
 
 @section('pageTitle')
-    {{$pageTitle}}
+    {{ $pageTitle }}
 @endsection
 
 @section('content')
@@ -16,13 +15,40 @@
         <div class="card-body">
             <div class="form-group">
                 <label>الاسم:</label>
-                <input name="name" type="text" class="form-control form-control-solid" placeholder="Enter full name" value="{{ old('name') }}"/>
-                <span class="form-text text-muted">Please enter your full name</span>
+                <input name="name[ar]" type="text" class="form-control form-control-solid" placeholder="Enter Arabic name"
+                    value="{{ old('name.ar') }}" />
+                <input name="name[en]" type="text" class="form-control form-control-solid mt-2"
+                    placeholder="Enter English name" value="{{ old('name.en') }}" />
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
+
             <div class="form-group">
                 <label>الوصف:</label>
-                <input name="description" type="text" class="form-control form-control-solid" placeholder="Enter email" value="{{ old('email') }}"/>
-                <span class="form-text text-muted">We'll never share your email with anyone else</span>
+                <input name="description[ar]" type="text" class="form-control form-control-solid"
+                    placeholder="Enter Arabic description" value="{{ old('description.ar') }}" />
+                <input name="description[en]" type="text" class="form-control form-control-solid mt-2"
+                    placeholder="Enter English description" value="{{ old('description.en') }}" />
+                @error('description')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <span>اختر الفئة الاساسية او الفرعية</span>
+
+                <div class="py-3 card-body">
+                    <!-- jstree -->
+                    <div id="jstree"></div>
+
+                </div>
+
+
+                <input type="hidden" name="parent" id="parent" class="parent" value="{{ old('parent') }}" />
+                @error('parent')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="card-footer">
@@ -30,15 +56,45 @@
             <button type="reset" class="btn btn-secondary">إلغاء</button>
         </div>
     </form>
-
-
-
-    @endsection
+@endsection
 
 @push('js')
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+    <script>
+        $('#jstree').jstree({
+            "core": {
+
+                'data': {!! loadcategories(old('parent')) !!},
+                "themes": {
+                    "variant": "large"
+                }
+
+            },
+
+            "checkbox": {
+                "keep_selected_style": false
+            },
+            "plugins": ["wholerow"]
+        });
+
+
+
+
+        $('#jstree').on('changed.jstree',function(e, data) {
+
+            var i, j, r = [];
+
+            for (i = 0, j = data.selected.length; i < j; i++)
+            {
+                r.push(data.instance.get_node(data.selected[i]).id);
+            }
+
+            $('.parent').val(r.join(', '));
+
+
+        });
+    </script>
 @endpush

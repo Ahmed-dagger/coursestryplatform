@@ -16,15 +16,22 @@ class Category extends Model implements TranslatableContract
     protected $fillable =['parent'];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['name','description'];
-
-    public function children()
-    {
-        return $this->hasMany(Category::class, 'parent_id');
-    }
+    
 
     public function details()
     {
         return $this->hasMany(CategoryTranslation::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent');
+    }
+
+    // Get the children categories
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent');
     }
 
 }

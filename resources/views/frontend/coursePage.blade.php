@@ -31,12 +31,7 @@
                 </div>
 
                 <div class="container mt-3">
-
                     <h3 class=" text-light ">{{ $course->name }}</h3>
-
-
-
-
                 </div>
 
                 <div class="container d-flex mt-3">
@@ -44,13 +39,11 @@
                     <h6 class="text-light pt-2 pl-3">{{ $teacher -> name }}</h6>
                     <h6 class="text-light pt-2 pl-3">|</h6>
                     <h6 class="pt-2 pl-3 text-light">Released At: {{ $course -> created_at }}</h6>
-
                 </div>
                 <div class="container py-4 d-flex mb-3">
                     <img width="25" height="25"
                         src="https://img.icons8.com/pastel-glyph/264/ffffff/person-male--v3.png" alt="person-male--v3" />
                     <h6 class="text-light pt-2">20 Student enrolled</h6>
-
                 </div>
 
                 <div class="col-sm">
@@ -59,8 +52,7 @@
                         <div class="">
                             <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Join Them Now</button>
-
-                        </div>
+                            </div>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
                             aria-labelledby="offcanvasRightLabel">

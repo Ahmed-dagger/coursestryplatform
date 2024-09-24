@@ -250,13 +250,13 @@
                     <div class="col-lg-6">
                         <label class="my-2">{{ __('dashboard/forms.categories') }}</label>
                         <div class="radio-inline">
-                            @foreach ($playlists as $playlist)
+                            @foreach ($categories as $category)
                             <div class="radio-input">
                                 <label class="label">
-                                    <input type="radio" name="playlist_id" value="{{ $playlist->id }}"
-                                        {{ old('playlist_id') == $playlist->id ? 'checked' : '' }} />
+                                    <input type="radio" name="category_id" value="{{ $category->id }}"
+                                        {{ old('category_id') == $category->id ? 'checked' : '' }} />
                                     <span></span>
-                                    {{ $playlist->name }}
+                                    {{ $category->name }}
                                 </label>
                             </div>
                             @endforeach
