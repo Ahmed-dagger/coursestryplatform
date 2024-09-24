@@ -35,7 +35,6 @@ class CoursesController extends Controller implements CourseRepositoryInterface
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'teacher_id' => 'required|exists:teachers,id',
-            'playlist_id' => 'required|exists:playlist,id',
             'image' => 'nullable|image', // Validate image
             'Price'=>'required'
         ]);
@@ -46,7 +45,6 @@ class CoursesController extends Controller implements CourseRepositoryInterface
             'name' => $validatedData['name'],
             'desc' => $validatedData['description'],
             'teacher_id' => $validatedData['teacher_id'],
-            'playlist_id' => $validatedData['playlist_id'],
             'Price'=> $validatedData['Price']
         ]);
 

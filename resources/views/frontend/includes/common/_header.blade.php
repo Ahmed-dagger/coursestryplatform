@@ -120,7 +120,7 @@
             <div class="d-flex cartContainer">
 
                 <div class="cart text-right d-flex justify-content-end">
-                    <a href="" id="cart-btn">
+                    <a href="{{ route('site.Cart') }}" id="cart-btn">
                         <script src="https://cdn.lordicon.com/lordicon.js"></script>
                         <lord-icon src="https://cdn.lordicon.com/taymdfsf.json" trigger="hover" stroke="bold"
                             colors="primary:#ffffff,secondary:#ffffff" style="width:30px;height:30px">

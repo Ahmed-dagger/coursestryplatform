@@ -13,9 +13,9 @@ class Course extends Model implements HasMedia
     use HasFactory,InteractsWithMedia;
 
     protected $table = 'courses';
-    protected $fillable = ['name','category_id','Price','desc','teacher_id','playlist_id','category_id'];
+    protected $fillable = ['name','category_id','Price','desc','teacher_id','category_id'];
 
-    public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
+    public function registerMediaConversions(?\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
     {
         $this->addMediaConversion('thumb')
              ->width(300)
@@ -24,7 +24,12 @@ class Course extends Model implements HasMedia
 
     public function playlist()
     {
-        return $this->belongsTo(Playlist::class, 'playlist_id');
+        return $this->hasMany(Playlist::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
 

@@ -13,7 +13,9 @@ class AdminDataTable extends BaseDataTable
 {
 
     protected function getParameters() {
+
         $parameters = parent::getParameters();
+
         if(!request()->has('filter'))
         {
             $parameters['buttons'][] = [
@@ -41,6 +43,8 @@ class AdminDataTable extends BaseDataTable
         
         return $parameters;
     }
+
+    
     public function __construct(DataTableRequest $request)
     {
         parent::__construct(new Admin());

@@ -8,6 +8,7 @@ use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\DataTables\Dashboard\Admin\PlaylistDataTable;
 use App\Models\Category;
 use App\Models\CategoryTranslation;
+use App\Models\Course;
 use App\Models\Playlist;
 use App\Models\Teacher;
 use App\Repositories\Contracts\PlaylistRepositoryInterface;
@@ -25,12 +26,12 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
 
     public function create()
     {
-        $categories = Category::all();
+        $courses = Course::all();
         $teachers = Teacher::all();
 
         return view('dashboard.Admin.playlists.create',
                      ['pageTitle' => trans('dashboard/admin.playlists')] 
-                     ,compact(['categories','teachers']));
+                     ,compact(['courses','teachers']));
 
     }
 
@@ -45,6 +46,7 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000', // Adjust length if needed
             'teacher_id' => 'required|exists:teachers,id',
+            'course_id' => 'required|exists:courses,id',
             'category_id' => 'sometimes|nullable',
         ]);
 
@@ -53,6 +55,7 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
             'name' => $validated['name'],
             'desc' => $validated['description'],
             'teacher_id' => $validated['teacher_id'], 
+            'course_id' => $validated['course_id'], 
             
         ]);
 

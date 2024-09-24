@@ -43,11 +43,13 @@
                                 alt="filter--v1" />
 
                             Recommendations</button>
-                        <p class="ml-2 mt-2">There are 0 courses Here</p>
+                        <p class="ml-2 mt-2 mx-2">There are {{ count($courses) }} courses Here</p>
                     </div>
 
 
                 </div>
+
+
 
                 <div class="col-sm text-right d-flex align-items-center">
                     <div class="container text-right">
@@ -76,25 +78,34 @@
 
 
         <div class="container mt-2">
-            <!-- Pagination -->
+
+
+            <div class="row g-3">
+                @if (count($courses) <= 0)
+                    <div class="container justify-content-center align-items-center text-center my-5">
+                        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                        <lord-icon src="https://cdn.lordicon.com/pagmnkiz.json" trigger="loop" stroke="bold"
+                            colors="primary:#c71f16,secondary:#ee6d66" style="width:250px;height:250px">
+                        </lord-icon>
+                        <h3 class="text-center">Can't find what you are looking for</h3>
+                    </div>
+                @else
+                    @foreach ($courses as $course)
+                        <div class="col-md-3 mb-4" id="courses-list">
+                            @include('frontend.includes.components.coursecard')
+                        </div>
+                    @endforeach
+                @endif
+            
+                <!-- Pagination -->
+            
+            </div>
+
+
+            
 
 
             <!-- Content Sections -->
-            <div id="content-1" class="content-section active">
-                <div class="row g-3">
-                        <div class="container justify-content-center align-items-center text-center my-5">
-                            <script src="https://cdn.lordicon.com/lordicon.js"></script>
-                            <lord-icon src="https://cdn.lordicon.com/pagmnkiz.json" trigger="loop" stroke="bold"
-                                colors="primary:#c71f16,secondary:#ee6d66" style="width:250px;height:250px">
-                            </lord-icon>
-                            <h3 class="text-center">Can't find what you are looking for</h3>
-                        </div>
-
-
-                </div>
-
-
-            </div>
 
 
 

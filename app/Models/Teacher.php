@@ -24,4 +24,9 @@ class Teacher extends Authenticatable implements JWTSubject {
     public function profile(): HasOne {
         return $this->hasOne(related:TeacherProfile::class, foreignKey:'teacher_id');
     }
+
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    } 
 }

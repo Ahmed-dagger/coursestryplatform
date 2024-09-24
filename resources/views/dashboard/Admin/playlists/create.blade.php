@@ -131,15 +131,18 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="my-2">{{ __('dashboard/forms.categories') }}</label>
+                        <label class="my-2">{{ __('dashboard/forms.courses') }}</label>
                         <div class="radio-inline">
-                            @foreach ($categories as $category)
-                                <label class="checkbox">
-                                    <input type="radio" name="category_id" value="{{ $category->id }}"
-                                        {{ old('category_id') == $category->id ? 'checked' : '' }} />
+                            @foreach ($courses as $course)
+                            <div class="radio-input">
+                                <label class="label">
+                                    <input type="radio" name="course_id" value="{{ $course->id }}"
+                                        {{ old('course_id') == $course->id ? 'checked' : '' }} />
                                     <span></span>
-                                    {{ $category->name }}
+                                    {{ $course->name }}
                                 </label>
+
+                            </div>
                             @endforeach
                         </div>
                         <span class="form-text text-muted">Please select user group</span>

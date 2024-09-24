@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::dropIfExists('categories_translation');
         
         Schema::create('categories_translation', function (Blueprint $table) {
             $table->id();
             $table->string('locale')->index();
             $table->longText('description');
             // Foreign key to the main model
-            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
+            
+            
             $table->unique(['category_id', 'locale']);
             // fields you want to translate
             $table->string('name');

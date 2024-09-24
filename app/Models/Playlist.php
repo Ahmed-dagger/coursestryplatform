@@ -9,13 +9,13 @@ class Playlist extends Model
 {
     use HasFactory;
 
-    protected $table = 'playlist';
-    protected $fillable = ['name','desc','category_id','teacher_id'];
+    protected $table = 'playlists';
+    protected $fillable = ['name','desc','category_id','teacher_id' , 'course_id'];
 
 
     public function course()
     {
-        return $this->hasMany(Course::class);
+        return $this->belongsTo(Course::class , 'course_id');
     } 
 
 }
