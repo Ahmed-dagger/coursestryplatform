@@ -14,6 +14,7 @@ $(document).ready(function() {
         formData.append('video_id', videoId);
         formData.append('name', videoName);
         formData.append('video', video);
+        console.log(video);
         console.log(url);
         $.ajax({
             url: url,
@@ -23,7 +24,29 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
 
-            success: function(video) {
+            success: function (videoBeforeProcessing) {
+
+                var interval = setInterval(function () {
+
+                    $.ajax({
+                        url: `/admin/videos/${videoBeforeProcessing.id}`,
+                        method: 'GET',
+                        success: function (videoWhileProcessing) {
+
+                            $('#video_upload-status').html('Processing');
+                            $('#video_upload-progress').css('width', videoWhileProcessing.percent + '%');
+                            $('#video_upload-progress').html(videoWhileProcessing.percent + '%');
+
+                            if (videoWhileProcessing.percent == 100) {
+                                clearInterval(interval); //break interval
+                                $('#video_upload-status').html('Done Processing');
+                                $('#video_upload-progress').parent().css('display', 'none');
+                                $('#video_submit-btn').css('display', 'block');
+                            }
+                        },
+                    });//end of ajax call
+
+                }, 3000)
 
             },
             xhr: function() {
@@ -31,6 +54,7 @@ $(document).ready(function() {
                 xhr.upload.addEventListener('progress', function(evt) {
                     if(evt.lengthComputable) {
                         var percentComplete = Math.round(evt.loaded / evt.total * 100) + "%";
+                        $('#video_upload-progress').css('width', percentComplete).html(percentComplete);
                     }
                 }, false);
                 return xhr;
