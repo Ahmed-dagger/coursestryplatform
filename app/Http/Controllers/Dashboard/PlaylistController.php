@@ -46,8 +46,7 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000', // Adjust length if needed
             'teacher_id' => 'required|exists:teachers,id',
-            'course_id' => 'required|exists:courses,id',
-            'category_id' => 'sometimes|nullable',
+            'course_id' => 'sometimes|nullable',
         ]);
 
         // Create a new playlist record
@@ -69,7 +68,9 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
         
 
         return back()->with('success','Deleted successfully');
-    }public function restore($id)
+    }
+    
+    public function restore($id)
     {
         $playlist = Playlist::withTrashed()->findOrFail($id);
         if($playlist -> trashed())
@@ -77,9 +78,47 @@ class PlaylistController extends Controller implements PlaylistRepositoryInterfa
             $playlist->restore();
         }
         
-        
-        
-
         return back()->with('success','Restored successfully');
+    }
+
+    public function edit($id)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $courses = Course::all();
+        $teachers = Teacher::all();
+
+        return view('dashboard.Admin.playlists.edit', ['pageTitle' => trans('dashboard/admin.playlists')] , compact(['playlist','courses','teachers']));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $playlist = Playlist::findOrFail($id);
+
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000', // Adjust length if needed
+            'teacher_id' => 'required|exists:teachers,id',
+            'course_id' => 'sometimes|nullable',
+        ]);
+
+        
+    
+        if ($playlist) {
+            // Update the playlist with validated data
+            $playlist->update($validatedData);
+    
+            // Redirect with a success message
+            return redirect()->route('admin.playlist.playlists.index')->with('success', 'Playlist updated successfully.');
+        } 
+        
+        else {
+            // Handle the case where the playlist is not found
+            return redirect()->route('admin.playlist.playlists.index')->with('error', 'Course not found.');
+        }
+
+      
+
+
     }
 }

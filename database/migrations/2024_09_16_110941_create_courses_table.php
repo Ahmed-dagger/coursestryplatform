@@ -17,9 +17,8 @@ return new class extends Migration
             $table->longText('desc');
             $table->unsignedInteger('Price');
             $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
-
-            
             $table->foreignId('teacher_id')->nullable()->references('id')->on('teachers')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

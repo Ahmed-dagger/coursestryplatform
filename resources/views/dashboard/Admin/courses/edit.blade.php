@@ -198,7 +198,9 @@
 
 
     <div class="card">
-        <form class="form" method="POST" action="{{ route('admin.courses.store') }}" enctype="multipart/form-data">
+        <form class="form" method="POST" action="{{ route('admin.courses.update' , $course ->id) }}" enctype="multipart/form-data">
+
+            @method('put')
             @csrf
             <div class="container my-4">
                 <div class="image">
@@ -209,7 +211,7 @@
                     <label for="file-input" class="drop-container">
                         <span class="drop-title">اضف هنا</span>
                         or
-                        <input name="image" type="file" accept="image/*" id="file-input">
+                        <input name="image" type="file" accept="image/*" id="file-input" value="{{ old('image', isset($course) ? $course->image : '') }}">
                     </label>
                 </div>
             </div>
@@ -222,13 +224,13 @@
                     <div class="col-lg-6">
                         <label class="mb-2">{{ __('dashboard/forms.fullname') }}</label>
                         <input name="name" type="text" class="form-control form-control-solid"
-                            placeholder="ادخل اسم الدورة كاملا" />
+                            placeholder="ادخل اسم الدورة كاملا"  value="{{ old('name', isset($course) ? $course->name : '') }}"/>
                         <span class="form-text text-muted mb-2">ادخل اسم الدورة كاملا</span>
                     </div>
                     <div class="col-lg-6">
 
                         <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.desc') }}</label>
-                        <textarea name="description" class="form-control form-control-solid" rows="1" placeholder="ادخل وصف الدورة"></textarea>
+                        <textarea name="description" class="form-control form-control-solid" rows="1" placeholder="ادخل وصف الدورة" >{{ old('description', isset($course) ? $course-> desc : '') }}</textarea>
                         <span class="form-text text-muted">ادخل وصف الدورة</span>
                     </div>
                 </div>
@@ -239,7 +241,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">$</span></div>
                             <input type="text" name="Price" class="form-control form-control-solid"
-                                placeholder="99.9" />
+                                placeholder="99.9" value="{{ old('Price', isset($course) ? $course->Price : '') }}"/>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -254,8 +256,7 @@
                             @foreach ($categories as $category)
                                 <div class="radio-input">
                                     <label class="label">
-                                        <input type="radio" name="category_id" value="{{ $category->id }}"
-                                            {{ old('category_id') == $category->id ? 'checked' : '' }} />
+                                        <input type="radio" name="category_id" value="{{ $category->id }}" {{ $course->category_id == $category->id ? 'checked' : '' }} />
                                         <span></span>
                                         {{ $category->name }}
                                     </label>
@@ -272,8 +273,7 @@
                             @foreach ($teachers as $teacher)
                                 <div class="radio-input">
                                     <label class="label">
-                                        <input type="radio" name="teacher_id" value="{{ $teacher->id }}"
-                                            {{ old('teacher_id') == $teacher->id ? 'checked' : '' }} />
+                                        <input type="radio" name="teacher_id" value="{{ $teacher->id }}" {{ $course->teacher_id == $teacher->id ? 'checked' : '' }}/>
                                         <span></span>
                                         {{ $teacher->name }}
                                     </label>

@@ -2,7 +2,7 @@
 
 
     @if ($course->deleted_at == null)
-        <form id="delete-form-{{ $course->id }}" action="{{ route('admin.destroy', $course->id) }}" method="post">
+        <form id="delete-form-{{ $course->id }}" action="{{ route('admin.courses.destroy', $course->id) }}" method="post">
             @csrf
             @method('DELETE')
 
@@ -20,7 +20,8 @@
         </form>
     @endif
 
-    <form action="">
+    <form action="{{ route('admin.courses.edit' ,$course->id ) }}">
+        @csrf
         <button class="btn btn-info">{{ trans('dashboard/general.update')}}</button>
 
     </form>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\AdminRepositoryInterface;
 use App\DataTables\Dashboard\Admin\AdminDataTable;
-
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller implements AdminRepositoryInterface {
 
@@ -71,5 +71,49 @@ class AdminController extends Controller implements AdminRepositoryInterface {
             $admin->restore();
         }
         return back()->with('success','Restored successfully');
+    }
+
+    public function edit($id)
+    {
+        $admin = Admin::findOrFail($id);
+
+        return view('dashboard.Admin.admins.edit', ['pageTitle' => trans('dashboard/admin.admins')] , compact(['admin']));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $admin = Admin::findOrFail($id);
+
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $id,
+            'phone' => 'required|string|max:20',
+            'password' => 'nullable|string|min:6|confirmed', // Ensure passwords match
+            'status' => 'required|in:active,inactive',
+            'role' => 'required|in:Admin,Supervisor',
+        ]);
+
+        if (!empty($request->password)) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            // Remove the password field from the validated data if the user didn't change it
+            unset($validatedData['password']);
+        }
+
+        
+    
+        if ($admin) {
+            // Update the playlist with validated data
+            $admin->update($validatedData);
+    
+            // Redirect with a success message
+            return redirect()->route('admin.admins.index')->with('success', 'Admin updated successfully.');
+        } 
+        
+        else {
+            // Handle the case where the playlist is not found
+            return redirect()->route('admin.admins.index')->with('error', 'Course not found.');
+        }
     }
 }
