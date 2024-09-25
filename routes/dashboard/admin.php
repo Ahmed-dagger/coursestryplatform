@@ -20,17 +20,23 @@ Route::group(
     ], function(){
         Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('dashboard', Dashboard\DashboardController::class)->name('dashboard');
-            Route::resource('admins', Dashboard\AdminController::class);
-            Route::delete('destroy/{id}' , [Dashboard\AdminController::class , 'destroy'])->name('destroy');
-            Route::post('resotre/{id}' , [Dashboard\AdminController::class , 'restore'])->name('restore');
 
+            Route::resource('admins', Dashboard\AdminController::class);
+            
+            Route::delete('destroy/{id}' , [Dashboard\AdminController::class , 'destroy'])->name('destroy');
+            
+            Route::post('resotre/{id}' , [Dashboard\AdminController::class , 'restore'])->name('restore');
             Route::resource('categories', Dashboard\CategoryController::class);
             
             Route::group(['middleware' => 'auth:admin', 'prefix' => 'playlist', 'as' => 'playlist.'], function () {
                 Route::resource('playlists', Dashboard\PlaylistController::class);   
+            
             });
 
             Route::resource('courses', Dashboard\CoursesController::class);
+
+            Route::resource('videos', Dashboard\VideoController::class)->except(['show']);
+
         });
 
         
