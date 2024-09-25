@@ -20,7 +20,7 @@
     </a>
 </div>
 <div class="menu-item">
-    <a class="menu-link {{ request()->routeIS('admin.playlists.index') ? 'active' : '' }}" href="{{route('admin.playlist.playlists.index')}}">
+    <a class="menu-link {{ request()->routeIS('admin.playlist.playlists.index') ? 'active' : '' }}" href="{{route('admin.playlist.playlists.index')}}">
         <span class="menu-icon">
             <i class="bi bi-grid fs-3"></i>
         </span>

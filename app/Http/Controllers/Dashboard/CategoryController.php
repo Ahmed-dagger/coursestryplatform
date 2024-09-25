@@ -58,6 +58,25 @@ class CategoryController extends Controller implements CategoryRepositoryInterfa
             ->with('success', 'Category created successfully.');
     }
 
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        
+        return back()->with('success','Deleted successfully');
+    }
+
+    public function restore($id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        if($category -> trashed())
+        {
+            $category->restore();
+        }
+        
+        return back()->with('success','Restored successfully');
+    }
+
 
     
 }

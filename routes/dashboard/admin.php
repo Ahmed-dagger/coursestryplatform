@@ -26,7 +26,6 @@ Route::group(
             Route::delete('destroy/{id}' , [Dashboard\AdminController::class , 'destroy'])->name('destroy');
 
             Route::post('resotre/{id}' , [Dashboard\AdminController::class , 'restore'])->name('restore');
-
             Route::resource('categories', Dashboard\CategoryController::class);
 
             Route::group(['middleware' => 'auth:admin', 'prefix' => 'playlist', 'as' => 'playlist.'], function () {

@@ -20,7 +20,7 @@
         </form>
     @endif
 
-    <form action="">
+    <form action="{{ route('admin.admins.edit',$admin->id) }}">
         <button class="btn btn-info">{{ trans('dashboard/general.update')}}</button>
 
     </form>

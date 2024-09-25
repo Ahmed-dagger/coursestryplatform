@@ -198,92 +198,64 @@
 
 
     <div class="card">
-        <form class="form" method="POST" action="{{ route('admin.courses.store') }}" enctype="multipart/form-data">
+        <form class="form" method="POST" action="{{ route('admin.playlist.playlists.update' , $playlist ->id) }}">
+
+            @method('put')
             @csrf
-            <div class="container my-4">
-                <div class="image">
-                    <span class="form-title">اضف صورة للدورة</span>
-                    <p class="form-paragraph">
-                        يجب ان تكون صورة
-                    </p>
-                    <label for="file-input" class="drop-container">
-                        <span class="drop-title">اضف هنا</span>
-                        or
-                        <input name="image" type="file" accept="image/*" id="file-input">
-                    </label>
-                </div>
-            </div>
-
-
-
-
             <div class="card-body">
                 <div class="form-group row" class="my-2">
                     <div class="col-lg-6">
                         <label class="mb-2">{{ __('dashboard/forms.fullname') }}</label>
                         <input name="name" type="text" class="form-control form-control-solid"
-                            placeholder="ادخل اسم الدورة كاملا" />
-                        <span class="form-text text-muted mb-2">ادخل اسم الدورة كاملا</span>
+                            placeholder="ادخل اسم القائمة كاملا"  value="{{ old('name', isset($playlist) ? $playlist->name : '') }}"/>
+                        <span class="form-text text-muted">ادخل اسم القائمة كاملا</span>
                     </div>
                     <div class="col-lg-6">
 
                         <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.desc') }}</label>
-                        <textarea name="description" class="form-control form-control-solid" rows="1" placeholder="ادخل وصف الدورة"></textarea>
-                        <span class="form-text text-muted">ادخل وصف الدورة</span>
+                        <textarea name="description" class="form-control form-control-solid" rows="1" placeholder="ادخل وصف للقائمة">{{ old('description', isset($playlist) ? $playlist->desc : '') }}</textarea>
+                        <span class="form-text text-muted">ادخل وصف القائمة</span>
                     </div>
                 </div>
-
-                <div class="form-group row" class="my-2">
+                <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="mb-2">{{ __('dashboard/forms.price') }}</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                            <input type="text" name="Price" class="form-control form-control-solid"
-                                placeholder="99.9" />
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-
-
-                    </div>
-                </div>
-                <div class="form-group row my-4">
-                    <div class="col-lg-6">
-                        <label class="my-2">{{ __('dashboard/forms.categories') }}</label>
+                        <label class="my-2">{{ __('dashboard/forms.courses') }}</label>
                         <div class="radio-inline">
-                            @foreach ($categories as $category)
-                                <div class="radio-input">
-                                    <label class="label">
-                                        <input type="radio" name="category_id" value="{{ $category->id }}"
-                                            {{ old('category_id') == $category->id ? 'checked' : '' }} />
-                                        <span></span>
-                                        {{ $category->name }}
-                                    </label>
-                                </div>
+                            @foreach ($courses as $course)
+                            <div class="radio-input">
+                                <label class="label">
+                                    <input type="radio" name="course_id" value="{{ $course->id }}" {{ $playlist->course_id == $course->id ? 'checked' : '' }} />
+                                    <span></span>
+                                    {{ $course->name }}
+                                </label>
+
+                            </div>
                             @endforeach
                         </div>
                         <span class="form-text text-muted">Please select user group</span>
                     </div>
-
-                    <div class="col-lg-6">
-
-                        <label class="my-2"> {{ __('dashboard/forms.teachers') }}</label>
-                        <div class="checkbox-list">
-                            @foreach ($teachers as $teacher)
-                                <div class="radio-input">
-                                    <label class="label">
-                                        <input type="radio" name="teacher_id" value="{{ $teacher->id }}"
-                                            {{ old('teacher_id') == $teacher->id ? 'checked' : '' }} />
-                                        <span></span>
-                                        {{ $teacher->name }}
-                                    </label>
-
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="my-2"> {{ __('dashboard/forms.teachers') }}</label>
+                    <div class="checkbox-list">
+                        @foreach ($teachers as $teacher)
+                            <div class="radio-input">
+                                <label class="label">
+                                    <input type="radio" name="teacher_id" value="{{ $teacher->id }}" {{ $playlist->teacher_id == $teacher->id ? 'checked' : '' }} />
+                                    <span></span>
+                                    {{ $teacher->name }}
+                                </label>
+
+                            </div>
+                        @endforeach
+                    </div>
+
+
+
+
+
+                </div>
             </div>
             <div class="">
                 <div class="row my-4 mx-3">
