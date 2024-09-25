@@ -35,9 +35,20 @@
 <script src="{{ asset("dashboard/assets/js/jquery.dataTables.min.js") }}"></script>
 <script src="{{ asset("dashboard/assets/js/dataTables.buttons.min.js") }}"></script>
 <script src="{{url('vendor/datatables/buttons.server-side.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+<script src="{{ asset('dashboard/assets/js/custom/video.js') }}"></script>
+
 <!-- End DataTables -->
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+</script>
 <!--end::Javascript-->
 @stack('js')
 </body>
