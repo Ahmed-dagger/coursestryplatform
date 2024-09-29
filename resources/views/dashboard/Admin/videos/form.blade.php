@@ -31,7 +31,11 @@
             <label class="my-2">{{ __('dashboard/forms.playlists') }}</label>
             <select name="playlist_id" id="playlist_id" class="form-control form-control-solid">
                 <option value="">Select Your Playlist ...</option>
-
+                @if($video)
+                    @foreach ($playlists as $playlist)
+                        <option value="{{ $playlist->id }}" {{ $playlist->id == $video->playlist_id ? 'selected' : '' }}>{{ $playlist->name }}</option>
+                    @endforeach
+                @endif
             </select>
             <span class="form-text text-muted">Please select playlist</span>
         </div>
