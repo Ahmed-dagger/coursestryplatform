@@ -4,12 +4,12 @@
         <div class="container d-flex justify-content-between">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
-                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">{{ setting('phone') }}</span>
+                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">01001311364</span>
                 </div>
                 <div class="col-md-6 d-flex align-items-center infoContainer">
                     <img width="16" height="16" class="mt-0 mx-1"
                         src="https://img.icons8.com/material-sharp/128/DB0000/mail.png" alt="mail" />
-                    <span class="text-dark infos">{{ setting('email') }}</span>
+                    <span class="text-dark infos">subul@mail.org</span>
                 </div>
 
 

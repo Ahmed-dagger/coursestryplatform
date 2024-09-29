@@ -762,7 +762,6 @@ body {
 /*? Courses page Styling*/
 
 .SubHeader {
-    background-image: url(/dashboard/assets/img/Subheader.jpeg);
     background-size: cover;
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.7);

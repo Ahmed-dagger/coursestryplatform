@@ -32,6 +32,18 @@ class Course extends Model implements HasMedia
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function relatedCourses()
+    {
+        return Course::where('category_id', $this->category_id)
+                     ->where('id', '!=', $this->id) // Exclude the current course
+                     ->get();
+    }
+
 
 
 }

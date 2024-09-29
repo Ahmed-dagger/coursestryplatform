@@ -21,9 +21,11 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $teacher = $course->teacher;
         $playlists = $course->playlist;
+        $category = $course-> category;
+        $relatedCourses = $course->relatedCourses();
         $courseCount = $teacher->course()->count();
 
 
-        return view('frontend.coursePage' ,['pageTitle' => trans('site/site.course_page_title')],compact('course','teacher' ,'courseCount' ,'playlists') );
+        return view('frontend.coursePage' ,['pageTitle' => trans('site/site.course_page_title')],compact('course','teacher' ,'courseCount' ,'playlists' , 'category','relatedCourses') );
     }
 }
