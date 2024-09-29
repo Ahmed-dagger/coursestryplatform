@@ -81,7 +81,7 @@ class VideoDataTable extends BaseDataTable
 
         return [
             ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false],
-            ['name' => 'name', 'data' => 'name', 'title' => trans('dashboard/admin.name')],
+            ['name' => 'name', 'data' => 'title', 'title' => trans('dashboard/admin.name')],
             ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('dashboard/general.created_at'), 'orderable' => false, 'searchable' => false],
             ['name' => 'updated_at', 'data' => 'updated_at', 'title' => trans('dashboard/general.updated_at'), 'orderable' => false, 'searchable' => false],
             ['name' => 'deleted_at', 'data' => 'deleted_at', 'title' => trans('dashboard/general.deleted_at'), 'orderable' => false, 'searchable' => false],

@@ -34,4 +34,12 @@ class Category extends Model implements TranslatableContract
         return $this->hasMany(Category::class, 'parent');
     }
 
+    public function translating($locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        // Return the translation where the locale matches
+        return $this->details()->where('locale', $locale)->first();
+    }
+
 }

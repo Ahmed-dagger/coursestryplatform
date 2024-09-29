@@ -288,13 +288,13 @@
 
             <div class="col-sm-5 ">
                 <h3>{{ $teacher -> name }}</h3>
-                <div class="d-flex flex-row mt-1 mb-4 text-danger">
+                {{-- <div class="d-flex flex-row mt-1 mb-4 text-danger">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <span class="text-secondary pl-3">4.7/5</span>
-                </div>
+                </div> --}}
                 <div class="d-flex flex-row">
                     <img width="18" height="18" src="https://img.icons8.com/ios-filled/128/circled-play.png"
                         alt="circled-play" />
