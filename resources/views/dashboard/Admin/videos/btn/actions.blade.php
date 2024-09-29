@@ -2,13 +2,10 @@
 
 
     @if ($video->deleted_at == null)
-        <form id="delete-form-{{ $video->id }}" action="{{ route('admin.destroy', $video->id) }}" method="post">
+        <form id="delete-form-{{ $video->id }}" action="{{ route('admin.videos.destroy', $video->id) }}" method="post">
             @csrf
             @method('DELETE')
-
             <button class="btn btn-danger mx-1  btn-sm">{{ trans('dashboard/general.delete')}}</button>
-
-
         </form>
     @else
         <form action="{{ route('admin.restore',$video->id) }}" method="post">
