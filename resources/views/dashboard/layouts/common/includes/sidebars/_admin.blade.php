@@ -46,3 +46,13 @@
 </div>
 
 
+<div class="menu-item">
+    <a class="menu-link {{ request()->routeIS('admin.settings') ? 'active' : '' }}" href="{{route('admin.settings')}}">
+        <span class="menu-icon">
+            <i class="bi bi-grid fs-3"></i>
+        </span>
+        <span class="menu-title">{{ trans('dashboard/admin.settings') }}</span>
+    </a>
+</div>
+
+

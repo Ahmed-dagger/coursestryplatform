@@ -14,13 +14,10 @@
                         <h5 class="text-light pr-1">Home </h5>
                     </a>
                     <h6 class="text-danger d-flex">🔴</h6>
-                    <a href="{{ route('site.courses') }}" class="text-decoration-none">
-                        <h5 class="text-light pl-1">Courses</h5>
-                    </a>
+                    <a href="{{ route('site.courses') }}" class="text-decoration-none"><h5 class="text-light pl-1">Courses</h5></a>
+
                     <h6 class="text-danger d-flex">🔴</h6>
-                    <a href="#" class="text-decoration-none">
-                        <h5 class="text-light pl-1">{{ $course->name }}</h5>
-                    </a>
+                    <a href="#" class="text-decoration-none"><h5 class="text-light pl-1">{{ $course->name }}</h5></a>
 
                 </div>
 
@@ -252,7 +249,7 @@
     <div class="container my-5">
         <h3 class="font-weight-bold my-4">Course Content</h3>
         <div class="accordion" id="accordionExample">
-            
+
             @foreach ($playlists as $playlist)
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading{{ $playlist -> id }}">
