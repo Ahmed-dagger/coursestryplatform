@@ -37,6 +37,9 @@ Route::group(
 
             Route::resource('videos', Dashboard\VideoController::class);
 
+            Route::get('/courses/{courseId}/playlists', [Dashboard\VideoController::class, 'getPlaylistsByCourse']);
+
+
         });
 
 

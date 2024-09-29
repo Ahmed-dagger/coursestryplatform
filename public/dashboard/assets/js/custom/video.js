@@ -1,4 +1,32 @@
 $(document).ready(function() {
+
+    $('#course_id').change(function() {
+        var courseId = $(this).val();
+
+        if (courseId) {
+            $.ajax({
+                url: '/admin/courses/' + courseId + '/playlists',
+                type: 'GET',
+                success: function(data) {
+                    var playlistDropdown = $('#playlist_id');
+                    playlistDropdown.empty(); // Clear any existing options
+                    playlistDropdown.append('<option value="">Select Your Playlist ...</option>'); // Default option
+
+                    // Populate the playlist dropdown with new data
+                    $.each(data, function(key, playlist) {
+                        playlistDropdown.append('<option value="' + playlist.id + '">' + playlist.name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert('Unable to fetch playlists');
+                }
+            });
+        } else {
+            $('#playlist_id').empty().append('<option value="">Select Your Playlist ...</option>');
+        }
+    });
+
+
     $('#video_input-file').on('change', function() {
         $('#video_upload-wrapper').css('display', 'none');
         $('#video_properties').css('display', 'block');

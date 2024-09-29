@@ -3,7 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\Video;
-use FFMpeg\FFMpeg;
+use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg; // Make sure to use the correct FFMpeg package
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -46,6 +47,6 @@ class StreamVideo implements ShouldQueue
             ->addFormat($lowBitrate)
             ->addFormat($midBitrate)
             ->addFormat($highBitrate)
-            ->save('public/videos/{$this->video->id}/{$this->video->id}.m3u8');
-    }
+            ->save('public/videos/' . $this->video->id . '/' . $this->video->id . '.m3u8');
+        }
 }

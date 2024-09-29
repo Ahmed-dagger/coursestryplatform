@@ -28,10 +28,9 @@ class VideoController extends Controller implements VideoRepositoryInterface
     public function create()
     {
         $playlists = Playlist::get();
+        $courses = Course::get();
         $video = Video::create([]);
-        return view('dashboard.Admin.videos.create', [
-            'pageTitle' => trans('dashboard/admin.playlists')],
-            compact('playlists', 'video'));
+        return view('dashboard.Admin.videos.create', ['pageTitle' => trans('dashboard/admin.playlists')],  compact('playlists', 'video', 'courses'));
 
     }
 
@@ -53,4 +52,10 @@ class VideoController extends Controller implements VideoRepositoryInterface
         return $video;
 
     }// end of show
+
+    public function getPlaylistsByCourse($courseId)
+    {
+        $playlists = Playlist::where('course_id', $courseId)->get();
+        return response()->json($playlists);
+    }
 }
