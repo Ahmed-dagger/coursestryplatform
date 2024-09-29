@@ -14,7 +14,7 @@
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label>الاسم:</label>
+                <label>{{ __('dashboard/forms.fullname') }}</label>
                 <input name="name[ar]" type="text" class="form-control form-control-solid" placeholder="Enter Arabic name"
                     value="{{ old('name.ar') }}" />
                 <input name="name[en]" type="text" class="form-control form-control-solid mt-2"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group">
-                <label>الوصف:</label>
+                <label>{{ __('dashboard/forms.desc') }}</label>
                 <input name="description[ar]" type="text" class="form-control form-control-solid"
                     placeholder="Enter Arabic description" value="{{ old('description.ar') }}" />
                 <input name="description[en]" type="text" class="form-control form-control-solid mt-2"
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group">
-                <span>اختر الفئة الاساسية او الفرعية</span>
+                <span>{{ __('dashboard/forms.parent') }}</span>
 
                 <div class="py-3 card-body">
                     <!-- jstree -->

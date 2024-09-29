@@ -23,6 +23,7 @@
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Vendors Javascript(used by this page)-->
 <script src="{{asset('dashboard/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--end::Page Vendors Javascript-->
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="{{asset('dashboard/assets/js/custom/widgets.js')}}"></script>

@@ -6,7 +6,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="../../demo13/dist/index.html">
+        <a href="{{ route('admin.dashboard') }}">
             <img alt="Logo" src="{{ asset('dashboard/assets/media/logos/logo-demo13.svg') }}" class="h-15px logo" />
         </a>
         <!--end::Logo-->
@@ -49,10 +49,9 @@
     <!--end::Aside menu-->
     <!--begin::Footer-->
     <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-        <a href="../../demo13/dist/documentation/getting-started.html" class="btn btn-custom btn-primary w-100"
+        <a href="" class="btn btn-custom btn-primary w-100"
             data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
             title="200+ in-house components and 3rd-party plugins">
-            <span class="btn-label">Docs &amp; Components</span>
             <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
             <span class="svg-icon btn-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
