@@ -82,7 +82,7 @@ class PlaylistDataTable extends BaseDataTable
 
     public function getColumns(): array
     {
-        $course = Course::with('playlist')->get();
+        $course = Course::with('playlists')->get();
 
         return [
             ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false,],

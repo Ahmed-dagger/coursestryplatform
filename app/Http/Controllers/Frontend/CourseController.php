@@ -18,14 +18,26 @@ class CourseController extends Controller
 
     public function show($id)
     {
-        $course = Course::findOrFail($id);
+        $course = Course::with([
+            'teacher',
+            'playlists.videos', // Fetch playlists and their related videos
+            'category', // Assuming you have a relatedCourses relationship defined
+        ])->findOrFail($id);
+    
+        // Get the teacher and other related data directly from the $course object
         $teacher = $course->teacher;
-        $playlists = $course->playlist;
-        $category = $course-> category;
+        $courseCount = $teacher->course->count(); // Assuming 'courses' relationship exists on the teacher model
+        $playlists = $course->playlists;
+        $category = $course->category;
         $relatedCourses = $course->relatedCourses();
-        $courseCount = $teacher->course()->count();
+        $totalVideos = $course->playlists->sum(function ($playlist) {
+            return $playlist->videos->count();
+        });
+        
 
 
-        return view('frontend.coursePage' ,['pageTitle' => trans('site/site.course_page_title')],compact('course','teacher' ,'courseCount' ,'playlists' , 'category','relatedCourses') );
+        return view(
+            'frontend.coursePage' ,['pageTitle' => trans('site/site.course_page_title')],
+            compact('course', 'teacher', 'courseCount', 'playlists', 'category', 'relatedCourses','totalVideos'));
     }
 }

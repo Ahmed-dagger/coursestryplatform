@@ -22,7 +22,7 @@ class Course extends Model implements HasMedia
              ->height(300);
     }
 
-    public function playlist()
+    public function playlists()
     {
         return $this->hasMany(Playlist::class);
     }

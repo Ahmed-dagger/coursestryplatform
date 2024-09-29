@@ -18,4 +18,9 @@ class Playlist extends Model
         return $this->belongsTo(Course::class , 'course_id');
     } 
 
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
 }
