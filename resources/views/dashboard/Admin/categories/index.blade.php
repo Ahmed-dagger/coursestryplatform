@@ -2,6 +2,7 @@
 
 @section('css')
 
+
 @endsection
 
 @section('pageTitle')
@@ -10,6 +11,9 @@
 
 @section('content')
     @include('dashboard.layouts.common._partial.messages')
+   
+
+   
 
     
     <div id="kt_content_container" class="container-xxl">
@@ -35,8 +39,14 @@
                 </h3>
             </div>
             <div class="py-3 card-body">
+
+                
                 <!--begin::Table container-->
+                <a href="" class="showbtn hidden delete_cat" data-toggle="modal" data-target="#exampleModalCenter"><button class="btn btn-danger mx-1 ">{{ trans('dashboard/general.delete')}}</button></a>
+                <a href="" class="showbtn hidden edit_cat"><button class="btn btn-info">{{ trans('dashboard/general.update')}}</button></a>
                 <div id="jstree"></div>
+
+                <input type="hidden" name="parent" id="parent" class="parent" value="" />
                 <!--end::Table container-->
             </div>
             <!--end::Header-->
@@ -63,8 +73,36 @@
     "checkbox" : {
       "keep_selected_style" : false
     },
-    "plugins" : [ "wholerow", "checkbox" ]
+    "plugins" : [ "wholerow" ] // add later checkbox for bulk
   });
+
+  $('#jstree').on('changed.jstree',function(e, data) {
+
+    var i, j, r = [];
+
+    for (i = 0, j = data.selected.length; i < j; i++)
+    {
+        r.push(data.instance.get_node(data.selected[i]).id);
+    }
+
+    $('.parent').val(r.join(', '));
+
+
+    if(r.join(', ') != '')
+    {
+        $('.showbtn').removeClass('hidden');
+
+        var urledit = '{{ route("admin.categories.edit", ":id") }}';  // Placeholder :id
+        urledit = urledit.replace(':id', r.join(', '));
+
+        $('.edit_cat').attr('href', urledit);
+    }else
+    {
+        $('.showbtn').addClass('hidden')
+    }
+
+
+    });
 </script>
 
 

@@ -90,4 +90,9 @@ class VideoController extends Controller implements VideoRepositoryInterface
         $playlists = Playlist::where('course_id', $courseId)->get();
         return response()->json($playlists);
     }
+
+    public function update($id)
+    {
+        
+    }
 }

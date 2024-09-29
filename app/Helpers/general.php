@@ -64,43 +64,45 @@ if (!function_exists('loadDashboardRoutes')) {
     }
 }
 
-
 if (!function_exists('loadcategories')) {
-    function loadcategories($select=null)
+    function loadcategories($select = null, $dep_hide = null)
     {
         $categories = Category::get();
 
         //  dd($categories);
         $category_arr = [];
 
-        foreach($categories as $category)
-        {
+        foreach ($categories as $category) {
             $list_arr = [];
-            if($select !== null && $select = $categories->id)
-            {
-                $list_arr['icon']= '';
-                $list_arr['a_attr']= '';
-                $list_arr['li_attr']= '';
-                $list_arr['children']= [];
-                $list_arr['state']= [
+            $list_arr['icon'] = '';
+            $list_arr['a_attr'] = '';
+            $list_arr['li_attr'] = '';
+            $list_arr['children'] = [];
+
+            if ($select !== null && ($select == $category->id)) {
+                $list_arr['state'] = [
                     'opened' => true,
                     'selected' => true,
+                    'disabled' => false,
+                ];
+            }
+
+            if ($dep_hide !== null && ($dep_hide == $category->id)) {
+                $list_arr['state'] = [
+                    'opened' => false,
+                    'selected' => false,
+                    'disabled' => true,
+                    'hidden' => true,
                 ];
             }
 
             $list_arr['id'] = $category->id;
-            $list_arr['parent'] = $category->parent !==null ? $category->parent : '#';
-                $list_arr['text'] = $category->name;
-            
-            
-            array_push($category_arr,$list_arr);
-            
+            $list_arr['parent'] = $category->parent !== null ? $category->parent : '#';
+            $list_arr['text'] = $category->name;
+
+            array_push($category_arr, $list_arr);
         }
 
-     
-
-        return json_encode($category_arr,JSON_UNESCAPED_UNICODE);
-        
+        return json_encode($category_arr, JSON_UNESCAPED_UNICODE);
     }
 }
-
