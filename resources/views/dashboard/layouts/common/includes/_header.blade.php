@@ -32,7 +32,7 @@
                         id="#kt_header_menu" data-kt-menu="true">
                         <!-- Start Dashboard Link -->
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link active py-3" href="#">
+                            <a class="menu-link active py-3" href="{{ route('admin.dashboard') }}">
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </div>
