@@ -4,13 +4,12 @@
         <div class="container d-flex justify-content-between">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
-                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">(+88) 1990
-                        6886</span>
+                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">{{ setting('phone') }}</span>
                 </div>
                 <div class="col-md-6 d-flex align-items-center infoContainer">
                     <img width="16" height="16" class="mt-0 mx-1"
                         src="https://img.icons8.com/material-sharp/128/DB0000/mail.png" alt="mail" />
-                    <span class="text-dark infos">agency@example.com</span>
+                    <span class="text-dark infos">{{ setting('email') }}</span>
                 </div>
 
 
@@ -18,25 +17,18 @@
             <div class="user-actions align-items-center text-center justify-content-center row g-0">
 
                 <div class="justify-content-center text-center col-md-8 d-flex ">
-                        <div class="container d-flex">
-                            <a href="" class="text-dark text-center cardentials mr-2">{{ __('site/site.login') }}</a>
-                            <a href=""
-                                class="text-dark cardentials infoContainer px-2 mx-2">{{ __('site/site.register')}}</a>
-                        </div>
-
+                    <div class="container d-flex">
+                        <a href="" class="text-dark text-center cardentials mr-2">{{ __('site/site.login') }}</a>
+                        <a href="" class="text-dark cardentials infoContainer px-2 mx-2">{{ __('site/site.register')}}</a>
+                    </div>
                 </div>
-
-
-
 
                 <div class="container justify-content-center d-flex col-md-4">
                     <a href="#" class="mx-1"><i class="fab fa-twitter icons"></i></a>
                     <a href="#" class="mx-1"><i class="fab fa-facebook-f icons"></i></a>
                     <a href="#" class="mx-1"><i class="fab fa-instagram icons"></i></a>
                     <a href="#" class="mx-1"><i class="fab fa-linkedin-in icons"></i></a>
-
                 </div>
-
 
             </div>
         </div>
@@ -53,22 +45,17 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav text-center align-items-center">
                         <li class="nav-item  {{ request()->routeIS('site.home') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('site.home') }}">{{ __('site/site.home_page_title')}}
-                            </a>
+                            <a class="nav-link" href="{{ route('site.home') }}">{{ __('site/site.home_page_title')}}</a>
                         </li>
                         <li class="nav-item {{ request()->routeIs('site.courses') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('site.courses') }}">
-                                {{ __('site/site.course_page_title')}}
-
-                            </a>
+                            <a class="nav-link" href="{{ route('site.courses') }}">{{ __('site/site.course_page_title')}}</a>
                         </li>
                         <li class="nav-item dropdownmenu">
                             <a class="nav-link buttonDrop" href="#">
                                 {{ __('site/site.Other_page_title')}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                                 </svg>
                             </a>
                             <div class="dropdown-content text-center" aria-labelledby="otherDropdown">
@@ -80,7 +67,6 @@
                         <li class="nav-item  {{ request()->routeIs('site.About') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('site.About') }}">
                                 {{ __('site/site.About_page_title')}}
-
                             </a>
                         </li>
                         <li class="nav-item  {{ request()->routeIs('site.Contact') ? 'active' : '' }}">
@@ -126,17 +112,17 @@
                             colors="primary:#ffffff,secondary:#ffffff" style="width:30px;height:30px">
                         </lord-icon></i>
 
-                        
+
                         <span class="badge rounded-pill badge-danger"></span>
-                        
-                        
-                        
+
+
+
                     </a>
                 </div>
 
-                
+
             </div>
-            
+
             <!--MObile Menu-->
             <div class="d-lg-none Burger">
                 <nav id="sidebar" class="sidebar">
@@ -189,7 +175,7 @@
 
                     <!-- Auth section -->
                     <div class="container justify-content-center">
-                        
+
                             <div class="container d-flex">
                                 <a href=""
                                     class="text-light text-decoration-none text-center cardentials mr-2">Log in</a>

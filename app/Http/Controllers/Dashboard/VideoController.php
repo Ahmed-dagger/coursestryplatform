@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Video;
 use App\Models\Playlist;
 use Illuminate\Foundation\Bus\DispatchesJobs;  // Add this
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller implements VideoRepositoryInterface
 {
@@ -52,6 +53,37 @@ class VideoController extends Controller implements VideoRepositoryInterface
         return $video;
 
     }// end of show
+
+    public function edit(Video $video) {
+        $playlists = Playlist::get();
+        $courses = Course::get();
+        return view('dashboard.Admin.videos.edit', ['pageTitle' => trans('dashboard/admin.Update Video')],  compact('video', 'playlists', 'courses'));
+    }
+
+    public function update(Request $request, Video $video) {
+
+        $validatedData = $request->validate([
+            'name' => 'required|unique:videos,name,' . $video->id,
+            'description' => 'required',
+            'course_id' => 'required|exists:courses,id',
+            'playlist_id' => 'required|exists:playlists,id',
+        ]);
+
+        $video->update($validatedData);
+        session()->flash('success', 'Data updated successfully');
+        return redirect()->route('admin.videos.index');
+
+    }
+
+    public function destroy(Video $video)
+    {
+        Storage::disk('local')->delete($video->path);
+        Storage::disk('local')->deleteDirectory('public/movies/' . $video->id);
+        $video->delete();
+        session()->flash('success', 'Data deleted successfully');
+        return redirect()->route('dashboard.movies.index');
+
+    }//end of destroy
 
     public function getPlaylistsByCourse($courseId)
     {

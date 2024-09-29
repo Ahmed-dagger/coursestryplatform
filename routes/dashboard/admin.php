@@ -19,6 +19,7 @@ Route::group(
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ], function(){
         Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
             Route::get('dashboard', Dashboard\DashboardController::class)->name('dashboard');
 
             Route::resource('admins', Dashboard\AdminController::class);
@@ -39,6 +40,8 @@ Route::group(
 
             Route::get('/courses/{courseId}/playlists', [Dashboard\VideoController::class, 'getPlaylistsByCourse']);
 
+            Route::get('/settings', [Dashboard\SettingController::class, 'index'])->name('settings');
+            Route::post('/settings/store', [Dashboard\SettingController::class, 'store'])->name('settings.store');
 
         });
 

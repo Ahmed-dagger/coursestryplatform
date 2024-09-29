@@ -6,15 +6,9 @@
 @section('content')
     <div class="container">
 
-        <div class="container d-flex align-items-center">
-            <h1 class="my-3">Cart <span style="font-size: 12px">( 0 Course)</span></h1>
+        <div class="container d-flex align-items-center"><h1 class="my-3">Cart <span style="font-size: 12px">( 0 Course)</span></h1></div>
 
-        </div>
-
-        <div class="container mb-3 text-left justify-content-end">
-
-
-        </div>
+        <div class="container mb-3 text-left justify-content-end"></div>
 
         <div class="row g-3 mb-5">
             <div class="container justify-content-center align-items-center text-center my-5 col-sm-3">
@@ -24,11 +18,10 @@
                     style="width:250px;height:250px">
                 </lord-icon>
                 <h3 class="text-center">Your Cart is Empty</h3>
-                <a class="text-decoration-none text-center" href="{{ route('site.courses') }}"><button class="LogINBtn text-center">Back To
-                        courses</button></a>
+                <a class="text-decoration-none text-center" href="{{ route('site.courses') }}"><button class="LogINBtn text-center">Back To courses</button></a>
 
             </div>
-            
+
 
 
 
@@ -57,7 +50,7 @@
         });
     </script>
 
-    
+
 
 
 
