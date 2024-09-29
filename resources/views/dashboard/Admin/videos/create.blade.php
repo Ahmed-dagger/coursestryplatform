@@ -13,11 +13,14 @@
             flex-direction: column;
         }
         .progress {
-            padding: 10px;
-            border-radius:5px;
-
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            height: 21px;
         }
     </style>
+
+
 @endpush('css')
 
 @section('pageTitle'){{ $pageTitle }}@endsection
@@ -45,9 +48,11 @@
             @method('put')
             <div class="card-body">
                 <div class="form-group">
-                    <label for="" style="margin-bottom:11px;">Uploading ...</label>
-                    <div class="progress" id="video_upload-progress" role="progressbar"></div>
-                </div>
+                    <label for="" style="margin-bottom:11px;" id="video_upload-status">Uploading ...</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" id="video_upload-progress" role="progressbar"></div>
+                    </div>
+                </div><br><br>
                 @include('dashboard.Admin.videos.form')
                 <div class="">
                     <div class="row my-4 mx-3">
@@ -64,7 +69,10 @@
     </div>
 @endsection
 
+
 @push('js')
+
+
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
@@ -74,3 +82,4 @@
 
    
 @endpush
+

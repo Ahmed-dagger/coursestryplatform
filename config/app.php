@@ -199,7 +199,8 @@ return [
         App\Providers\ObservableServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\SidebarServiceProvider::class,
-        
+        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+
     ],
 
     /*
@@ -216,5 +217,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Admin' => App\Models\Admin::class,
+        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+
     ])->toArray(),
 ];

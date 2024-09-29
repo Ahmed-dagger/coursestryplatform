@@ -15,15 +15,25 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label class="my-2">{{ __('dashboard/forms.courses') }}</label>
-            <select name="playlist_id" id="playlist_id" class="form-control form-control-solid">
-                <option value="">Select Your Playlist ...</option>
-                @foreach ($playlists as $playlist)
-                    <option value="{{ $playlist->id }}"
-                        {{ old('playlist_id', isset($video) && $playlist->id == $video->playlist_id ? 'selected' : '') }}>
-                        {{ $playlist->name }}
+            <select name="course_id" id="course_id" class="form-control form-control-solid">
+                <option value="">Select Your Course ...</option>
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}"
+                        {{ old('playlist_id', isset($video) && $course->id == $video->course_id ? 'selected' : '') }}>
+                        {{ $course->name }}
                     </option>
                 @endforeach
             </select>
-            <span class="form-text text-muted">Please select user group</span>
+            <span class="form-text text-muted">Please select the course</span>
+        </div>
+
+        <div class="col-lg-6">
+            <label class="my-2">{{ __('dashboard/forms.playlists') }}</label>
+            <select name="playlist_id" id="playlist_id" class="form-control form-control-solid">
+                <option value="">Select Your Playlist ...</option>
+
+            </select>
+            <span class="form-text text-muted">Please select playlist</span>
         </div>
     </div>
+

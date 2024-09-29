@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('path')->nullable();
+            $table->integer('percent')->default(0);
             $table->foreignId('playlist_id')->nullable()->constrained('playlists')->onDelete('cascade');
             $table->foreignId('course_id')->nullable()->constrained('courses')->onDelete('cascade');
             $table->timestamps();
