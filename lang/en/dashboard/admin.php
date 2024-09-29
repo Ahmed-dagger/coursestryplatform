@@ -11,4 +11,5 @@ return [
     'price'       => 'Price',
     'playlist'    => 'Playlist',
     'videos'    => 'videos',
+    'settings'    => 'settings',
 ];

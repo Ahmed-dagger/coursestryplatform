@@ -6,7 +6,7 @@
             @csrf
             @method('DELETE')
 
-            <button class="btn btn-danger mx-1">{{ trans('dashboard/general.delete')}}</button>
+            <button class="btn btn-danger mx-1  btn-sm">{{ trans('dashboard/general.delete')}}</button>
 
 
         </form>
@@ -14,17 +14,13 @@
         <form action="{{ route('admin.restore',$video->id) }}" method="post">
             @csrf
 
-            <button class="btn btn-danger mx-1">{{ trans('dashboard/general.restore')}}</button>
+            <button class="btn btn-danger mx-1 btn-sm">{{ trans('dashboard/general.restore')}}</button>
 
 
         </form>
     @endif
 
-    <form action="">
-        <button class="btn btn-info">{{ trans('dashboard/general.update')}}</button>
-
-    </form>
-
+        <a href="{{ route('admin.videos.edit', $video->id) }}" class="btn btn-info btn-sm" style="margin-left: 5px; justify-content: center; align-items: center; display: flex;">{{ trans('dashboard/general.update')}}</a>
 </div>
 
 

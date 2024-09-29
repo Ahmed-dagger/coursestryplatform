@@ -118,7 +118,7 @@
                 <div class="form-group row" class="my-2">
                     <div class="col-lg-6">
                         <label class="mb-2">{{ __('dashboard/forms.Email') }}</label>
-                        <input name="email" type="text" class="form-control form-control-solid" placeholder="Email" value="{{ old('email', settingx('email')) }}"/>
+                        <input name="email" type="text" class="form-control form-control-solid" placeholder="Email" value="{{ old('email', setting('email')) }}"/>
                         <span class="form-text text-muted">Email</span>
                     </div>
                     <div class="col-lg-6">

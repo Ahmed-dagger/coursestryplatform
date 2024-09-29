@@ -53,6 +53,30 @@ class VideoController extends Controller implements VideoRepositoryInterface
 
     }// end of show
 
+    public function edit(Video $video) {
+        $playlists = Playlist::get();
+        $courses = Course::get();
+        return view('dashboard.Admin.videos.edit', ['pageTitle' => trans('dashboard/admin.Update Video')],  compact('video', 'playlists', 'courses'));
+    }
+
+    public function update(Request $request, Video $video) {
+        if ($request->type == 'publish') {
+            //publish
+            $request->validate([
+                'name' => 'required|unique:videos,name,' . $video->id,
+                'description' => 'required',
+            ]);
+        } else {
+            //update
+            $request->validate([
+                'name' => 'required|unique:videos,name,' . $video->id,
+                'description' => 'required',
+            ]);
+
+        }//end of else
+
+    }
+
     public function getPlaylistsByCourse($courseId)
     {
         $playlists = Playlist::where('course_id', $courseId)->get();
