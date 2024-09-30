@@ -78,7 +78,7 @@ class VideoController extends Controller implements VideoRepositoryInterface
     public function destroy(Video $video)
     {
         Storage::disk('local')->delete($video->path);
-        Storage::disk('local')->deleteDirectory('public/movies/' . $video->id);
+        Storage::disk('local')->deleteDirectory('public/videos/' . $video->id);
         $video->delete();
         session()->flash('success', 'Data deleted successfully');
         return redirect()->route('dashboard.movies.index');
@@ -89,10 +89,5 @@ class VideoController extends Controller implements VideoRepositoryInterface
     {
         $playlists = Playlist::where('course_id', $courseId)->get();
         return response()->json($playlists);
-    }
-
-    public function update($id)
-    {
-        
     }
 }
