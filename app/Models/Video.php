@@ -9,14 +9,20 @@ class Video extends Model
 {
     use HasFactory;
 
-    protected $table = 'videos';
-
-
-
     protected $guarded=[];
 
     public function playlist()
     {
         return $this->belongsTo(Playlist::class,'playlist_id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class,'course_id');
+    }
+
+    public function getCourseName()
+    {
+        return $this->course ? $this->course->name : 'No course assigned';
     }
 }
