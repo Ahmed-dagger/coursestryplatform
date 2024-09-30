@@ -6,7 +6,8 @@
 @section('content')
 
 
-    <div class="container-fluid justify-content-center align-items-center SubHeader">
+    <div class="container-fluid justify-content-center align-items-center SubHeader"
+        style="background-image: url({{ $course->getFirstMediaUrl('courses') }})">
         <div class="container align-items-center justify-content-center">
             <div class="row justify-content-center align-items-center">
                 <div class="container d-flex  pt-5 mt-3">
@@ -14,16 +15,20 @@
                         <h5 class="text-light pr-1">Home </h5>
                     </a>
                     <h6 class="text-danger d-flex">🔴</h6>
-                    <a href="{{ route('site.courses') }}" class="text-decoration-none"><h5 class="text-light pl-1">Courses</h5></a>
+                    <a href="{{ route('site.courses') }}" class="text-decoration-none">
+                        <h5 class="text-light pl-1">Courses</h5>
+                    </a>
 
                     <h6 class="text-danger d-flex">🔴</h6>
-                    <a href="#" class="text-decoration-none"><h5 class="text-light pl-1">{{ $course->name }}</h5></a>
+                    <a href="#" class="text-decoration-none">
+                        <h5 class="text-light pl-1">{{ $course->name }}</h5>
+                    </a>
 
                 </div>
 
                 <div class="container d-flex mt-3">
-                    <button class="badgeSail mt-2">-39%</button>
-                    <p class="text-danger pt-2 ml-2">Angular Course</p>
+                    {{-- <button class="badgeSail mt-2">-39%</button> --}}
+                    <p class="text-danger pt-2 ml-2">{{ $category->name }}</p>
 
                 </div>
 
@@ -33,23 +38,23 @@
 
                 <div class="container d-flex mt-3">
                     <img src="../img/Bannerwoman.png" width="30" class="rounded-circle" alt="">
-                    <h6 class="text-light pt-2 pl-3">{{ $teacher -> name }}</h6>
+                    <h6 class="text-light pt-2 pl-3">{{ $teacher->name }}</h6>
                     <h6 class="text-light pt-2 pl-3">|</h6>
-                    <h6 class="pt-2 pl-3 text-light">Released At: {{ $course -> created_at }}</h6>
+                    <h6 class="pt-2 pl-3 text-light">Released At: {{ $course->created_at }}</h6>
                 </div>
-                <div class="container py-4 d-flex mb-3">
+                {{-- <div class="container py-4 d-flex mb-3">
                     <img width="25" height="25"
                         src="https://img.icons8.com/pastel-glyph/264/ffffff/person-male--v3.png" alt="person-male--v3" />
                     <h6 class="text-light pt-2">20 Student enrolled</h6>
-                </div>
+                </div> --}}
 
-                <div class="col-sm">
+                <div class="col-sm mt-5">
                     <div class="mb-5">
 
                         <div class="">
                             <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Join Them Now</button>
-                            </div>
+                        </div>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
                             aria-labelledby="offcanvasRightLabel">
@@ -61,11 +66,18 @@
                             <div class="offcanvas-body">
                                 <div class="card shadow-sm">
                                     <div class="card-img-top">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-                                                allowfullscreen></iframe>
-                                        </div>
+                                       
+                                            @if ($course->hasMedia('courses'))
+                                                <img src="{{ $course->getFirstMediaUrl('courses') }}" class="w-100"
+                                                    alt="{{ $course->name }}">
+                                            @else
+                                                <svg class="image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z">
+                                                    </path>
+                                                </svg>
+                                            @endif
+                                        
 
                                     </div>
                                     <div class="card-body">
@@ -80,7 +92,7 @@
                                                     <h5 class="text-danger">{{ $course->Price }} USD</h5>
                                                 @endif
 
-                                                <button class="badgeSail">-39%</button>
+                                                {{-- <button class="badgeSail">-39%</button> --}}
 
                                             </div>
                                             <div class="justify-content-between d-flex border-bottom ">
@@ -102,14 +114,14 @@
                                                 <p> <img class="mr-1" width="18" height="18"
                                                         src="https://img.icons8.com/ios-filled/128/circled-play.png"
                                                         alt="vertical-settings-mixer" />Videos</p>
-                                                <p>69 videos</p>
+                                                <p>{{ $totalVideos }} videos</p>
                                             </div>
                                             <div class="justify-content-between d-flex border-bottom ">
 
                                                 <p> <img class="mr-1" width="18" height="18"
                                                         src="https://img.icons8.com/material-sharp/128/price-tag.png"
-                                                        alt="vertical-settings-mixer" />Subject</p>
-                                                <p>Angular</p>
+                                                        alt="vertical-settings-mixer" />Category</p>
+                                                <p>{{ $category->name }}</p>
                                             </div>
                                             <div class="justify-content-between d-flex border-bottom ">
 
@@ -119,12 +131,12 @@
                                                 <p>{{ $course->courseLanguage }}</p>
                                             </div>
 
-                                            <h5>Course Includes: </h5>
+                                            {{-- <h5>Course Includes: </h5>
                                             <ul>
                                                 <li>Angular</li>
                                                 <li>FrameWorks</li>
                                                 <li>DB</li>
-                                            </ul>
+                                            </ul> --}}
 
                                         </div>
 
@@ -148,39 +160,34 @@
                                                 Related courses
                                             </h4>
 
-                                            <div class="row d-flex mb-3">
-                                                <div class="col-sm-6">
+                                            @foreach ($relatedCourses as $relatedCourse)
+                                                <div class="row d-flex mb-3">
+                                                    <div class="col-sm-6">
 
-                                                    <img style="width: 100%;" src="../img/cardImage.jpeg" alt="">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h6>Python course 2020 (Full-guide)</h6>
-                                                    <h6 class="text-danger">250 USD</h6>
-                                                </div>
+                                                        <a href="{{ route('site.courses.show', $course->id) }}">
+                                                            @if ($relatedCourse->hasMedia('courses'))
+                                                                <img src="{{ $relatedCourse->getFirstMediaUrl('courses') }}"
+                                                                    class="w-100" alt="{{ $relatedCourse->name }}">
+                                                            @else
+                                                                <svg class="image" xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path
+                                                                        d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z">
+                                                                    </path>
+                                                                </svg>
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <a href="{{ route('site.courses.show', $course->id) }}"
+                                                            class="font-weight-bold text-decoration-none text-dark">
+                                                            <h6>{{ $relatedCourse->name }}</h6>
+                                                        </a>
+                                                        <h6 class="text-danger">Price: {{ $relatedCourse->Price }}$</h6>
+                                                    </div>
 
-                                            </div>
-                                            <div class="row d-flex mb-3">
-                                                <div class="col-sm-6">
-
-                                                    <img style="width: 100%;" src="../img/cardImage.jpeg" alt="">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <h6>Python course 2020 (Full-guide)</h6>
-                                                    <h6 class="text-danger">250 USD</h6>
-                                                </div>
-
-                                            </div>
-                                            <div class="row d-flex mb-3">
-                                                <div class="col-sm-6">
-
-                                                    <img style="width: 100%;" src="../img/cardImage.jpeg" alt="">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h6>Python course 2020 (Full-guide)</h6>
-                                                    <h6 class="text-danger">250 USD</h6>
-                                                </div>
-
-                                            </div>
+                                            @endforeach
 
                                         </div>
                                     </div>
@@ -197,14 +204,14 @@
         <div class="row">
             <h3>About This Course</h3>
             <p>
-                {{ $course -> desc }}
+                {{ $course->desc }}
             </p>
 
         </div>
 
     </div>
 
-    <div class="container CourseINclud">
+    {{-- <div class="container CourseINclud">
         <div class="row">
             <h3 class="mt-3">what you will learn</h3>
             <div class="col-md">
@@ -243,26 +250,38 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="container my-5">
         <h3 class="font-weight-bold my-4">Course Content</h3>
         <div class="accordion" id="accordionExample">
 
-            @foreach ($playlists as $playlist)
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading{{ $playlist -> id }}">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $playlist -> id }}" aria-expanded="true" aria-controls="collapse{{ $playlist -> id }}">
-                  {{ $playlist -> name }}
-                  </button>
-                </h2>
-                <div id="collapse{{ $playlist -> id }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ $playlist -> id }}" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    {{ $playlist-> desc }}
-                  </div>
+            @foreach ($course->playlists as $playlist)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ $playlist->id }}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ $playlist->id }}" aria-expanded="true"
+                            aria-controls="collapse{{ $playlist->id }}">
+                            {{ $playlist->name }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ $playlist->id }}" class="accordion-collapse collapse show"
+                        aria-labelledby="heading{{ $playlist->id }}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            @foreach ($playlist->videos as $video)
+                                <div class="container d-flex align-items-center">
+                                    <svg class="mx-3 mb-2" xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="currentColor" class="bi bi-display" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4q0 1 .25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75Q6 13 6 12H2s-2 0-2-2zm1.398-.855a.76.76 0 0 0-.254.302A1.5 1.5 0 0 0 1 4.01V10c0 .325.078.502.145.602q.105.156.302.254a1.5 1.5 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.76.76 0 0 0 .254-.302 1.5 1.5 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.76.76 0 0 0-.302-.254A1.5 1.5 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145" />
+                                    </svg>
+                                    <p class="mt-1">{{ $video->title }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-              </div>
             @endforeach
         </div>
 
@@ -275,7 +294,7 @@
 
 
 
-    <div class="container">
+    <div class="container my-5">
         <h3 class="mb-5">The Tutor of the course</h3>
         <div class="row">
             <div class="col-sm-2">
@@ -284,7 +303,7 @@
             </div>
 
             <div class="col-sm-5 ">
-                <h3>{{ $teacher -> name }}</h3>
+                <h3>{{ $teacher->name }}</h3>
                 {{-- <div class="d-flex flex-row mt-1 mb-4 text-danger">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -301,7 +320,7 @@
                     <p class="mx-2 pb-3">125 Videos</p>
                     <img width="18" height="18" src="https://img.icons8.com/ios-glyphs/128/person-male.png"
                         alt="person-male" />
-                    <p class="mx-2 pb-3">120 Students Enrolled</p>
+                    {{-- <p class="mx-2 pb-3">120 Students Enrolled</p> --}}
                 </div>
                 <button class="btn btn-outline-danger">Show More</button>
 
@@ -314,7 +333,7 @@
 
     </div>
 
-    <div class="container my-5">
+    {{-- <div class="container my-5">
         <h3 class="my-5">Our students Reveiws</h3>
         <div class="row">
             <div class="col-sm-2 my-5 shadow-sm">
@@ -392,7 +411,7 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
 
     @push('js')

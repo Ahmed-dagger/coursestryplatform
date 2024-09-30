@@ -22,7 +22,7 @@ class Course extends Model implements HasMedia
              ->height(300);
     }
 
-    public function playlist()
+    public function playlists()
     {
         return $this->hasMany(Playlist::class);
     }
@@ -30,6 +30,18 @@ class Course extends Model implements HasMedia
     public function teacher()
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function relatedCourses()
+    {
+        return Course::where('category_id', $this->category_id)
+                     ->where('id', '!=', $this->id) // Exclude the current course
+                     ->get();
     }
 
 
