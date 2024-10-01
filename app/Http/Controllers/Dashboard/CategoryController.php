@@ -107,21 +107,25 @@ class CategoryController extends Controller implements CategoryRepositoryInterfa
             ->with('success', __('Category updated successfully'));
     }
 
-    public function destroy(Request $request)
-    {
-        $ids = $request->input('ids'); // Get the array of IDs from the request
+    public function destroy($id)
+{
+    $category = Category::findOrFail($id);
+    
+    // Check if category exists, and delete it
+    if ($category) {
+        $category->delete();
 
-    // Ensure that the IDs are an array
-    if (!is_array($ids)) {
-        return response()->json(['error' => 'Invalid input'], 400);
+        return response()->json([
+            'success' => true,
+            'message' => 'Category deleted successfully.'
+        ]);
     }
 
-    // Perform deletion
-    Category::destroy($ids);
-        
-        return redirect()->route('admin.categories.index')
-            ->with('success', __('Category deleted successfully'));
-    }
+    return response()->json([
+        'success' => false,
+        'message' => 'Category not found.'
+    ], 404);
+}
 
     public function restore($id)
     {

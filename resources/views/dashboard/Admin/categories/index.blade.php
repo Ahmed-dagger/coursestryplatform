@@ -13,6 +13,25 @@
     @include('dashboard.layouts.common._partial.messages')
    
 
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationLabel">Delete Confirmation</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this category?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
    
 
     
@@ -40,10 +59,19 @@
             </div>
             <div class="py-3 card-body">
 
+
+                <div class="mb-4">
+                    <a href="" hidden class="showbtn delete_cat" id="deleteCategory">
+                        <button class="btn btn-danger mx-1">{{ trans('dashboard/general.delete') }}</button>
+                    </a>
+                    <a href="" hidden class="showbtn edit_cat">
+                        <button class="btn btn-info">{{ trans('dashboard/general.update')}}</button>
+                    </a>
+                </div>
+
                 
                 <!--begin::Table container-->
-                <a href="" class="showbtn hidden delete_cat" data-toggle="modal" data-target="#exampleModalCenter"><button class="btn btn-danger mx-1 ">{{ trans('dashboard/general.delete')}}</button></a>
-                <a href="" class="showbtn hidden edit_cat"><button class="btn btn-info">{{ trans('dashboard/general.update')}}</button></a>
+
                 <div id="jstree"></div>
 
                 <input type="hidden" name="parent" id="parent" class="parent" value="" />
@@ -88,21 +116,61 @@
     $('.parent').val(r.join(', '));
 
 
-    if(r.join(', ') != '')
-    {
-        $('.showbtn').removeClass('hidden');
+    if (r.length > 0) { // Category is selected
+        // Show the buttons
+        $('.showbtn').removeAttr('hidden');
 
-        var urledit = '{{ route("admin.categories.edit", ":id") }}';  // Placeholder :id
+        // Update the edit button's URL with the selected category ID
+        var urledit = '{{ route("admin.categories.edit", ":id") }}'; // Placeholder :id
         urledit = urledit.replace(':id', r.join(', '));
-
         $('.edit_cat').attr('href', urledit);
+
+        $('#deleteCategory').data('id', r.join(', '));
+
     }else
     {
-        $('.showbtn').addClass('hidden')
+        $('.showbtn').addAttr('hidden');
     }
 
 
     });
+
+    $('#deleteCategory').on('click', function(e) {
+    e.preventDefault();
+
+    // Open confirmation modal (if using modal)
+    $('#deleteConfirmationModal').modal('show');
+});
+
+// Handle confirm delete button inside modal
+$('#confirmDeleteBtn').on('click', function() {
+    var categoryId = $('#deleteCategory').data('id');
+
+    if (categoryId) {
+        var deleteUrl = '{{ route("admin.categories.destroy", ":id") }}';
+        deleteUrl = deleteUrl.replace(':id', categoryId);
+
+        // Make an AJAX request to delete the category or submit a form (method depends on your preference)
+        $.ajax({
+            url: deleteUrl,
+            type: 'DELETE', // Assuming RESTful route with DELETE method
+            data: {
+                _token: '{{ csrf_token() }}' // CSRF token for security
+            },
+            success: function(response) {
+                // Handle success (e.g., reload page or remove the category from the list)
+                window.location.reload(); // Or update UI dynamically
+            },
+            error: function(xhr) {
+                // Handle error (e.g., show error message)
+                alert('Failed to delete the category.');
+            }
+        });
+
+        // Close the modal after confirmation
+        $('#deleteConfirmationModal').modal('hide');
+    }
+});
 </script>
 
 
