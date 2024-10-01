@@ -4,49 +4,49 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Contracts\TeacherRepositoryInterface;
-use App\DataTables\Dashboard\Admin\TeacherDataTable;
-use App\Models\Teacher;
+use App\Repositories\Contracts\AcademicRepositoryInterface;
+use App\DataTables\Dashboard\Admin\AcademicDataTable;
+use App\Models\Academic;
 use Illuminate\Support\Facades\Hash;
 
 
 
-class TeacherController extends Controller implements TeacherRepositoryInterface
+class AcademicController extends Controller implements AcademicRepositoryInterface
 {
-    public function __construct(protected TeacherDataTable $teacherDataTable, protected TeacherRepositoryInterface $teacherInterface) {
-        $this->teacherInterface = $teacherInterface;
-        $this->teacherDataTable = $teacherDataTable;
+    public function __construct(protected AcademicDataTable $academicDataTable, protected AcademicRepositoryInterface $academicInterface) {
+        $this->academicInterface = $academicInterface;
+        $this->academicDataTable = $academicDataTable;
     }
 
-    public function index(TeacherDataTable $teacherDataTable) {
-        return $this->teacherInterface->index($this->teacherDataTable);
+    public function index(AcademicDataTable $teacherDataTable) {
+        return $this->academicInterface->index($this->academicDataTable);
     }
 
     public function show($uuid) {
-        $teacher = Teacher::whereHas('profile', function($query) use ($uuid) {
+        $academic = Academic::whereHas('profile', function($query) use ($uuid) {
             $query->whereUuid($uuid);
         })->firstOrFail();
         //return view('admin.show', compact('admin'));
-        return $teacher;
+        return $academic;
     }
 
 
     public function create()
     {
-        return view('dashboard.Admin.teachers.create', ['pageTitle' => trans('dashboard/admin.teachers')]);
+        return view('dashboard.Admin.academics.create', ['pageTitle' => trans('dashboard/admin.academics')]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:teachers,email',
+            'email' => 'required|email|unique:academics,email',
             'phone' => 'required|string|max:20',
             'password' => 'required|string|min:6|confirmed', // Ensure passwords match
             'status' => 'required|in:active,inactive',
         ]);
 
-        Teacher::create([
+        Academic::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
@@ -54,23 +54,23 @@ class TeacherController extends Controller implements TeacherRepositoryInterface
             'status' => $validated['status'],
         ]);
 
-        return redirect()->route('admin.teachers.index')->with('success', 'Teacher created successfully.');
+        return redirect()->route('admin.academics.index')->with('success', 'Academic created successfully.');
     }
 
     public function destroy($id)
     {
-        $teacher = Teacher::findOrFail($id);
-        $teacher->delete();
+        $academic = Academic::findOrFail($id);
+        $academic->delete();
         
 
         return back()->with('success','Deleted successfully');
     }
     public function restore($id)
     {
-        $teacher = Teacher::withTrashed()->findOrFail($id);
-        if($teacher -> trashed())
+        $academic = Academic::withTrashed()->findOrFail($id);
+        if($academic -> trashed())
         {
-            $teacher->restore();
+            $academic->restore();
         }
         return back()->with('success','Restored successfully');
     }
@@ -78,19 +78,19 @@ class TeacherController extends Controller implements TeacherRepositoryInterface
 
     public function edit($id)
     {
-        $teacher = Teacher::findOrFail($id);
+        $academic = Academic::findOrFail($id);
 
-        return view('dashboard.Admin.teachers.edit', ['pageTitle' => trans('dashboard/admin.teachers')] , compact(['teacher']));
+        return view('dashboard.Admin.academics.edit', ['pageTitle' => trans('dashboard/admin.academics')] , compact(['academic']));
     }
 
     public function update(Request $request,$id)
     {
-        $teacher = Teacher::findOrFail($id);
+        $academic = Academic::findOrFail($id);
 
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:teachers,email,' . $id,
+            'email' => 'required|email|unique:academics,email,' . $id,
             'phone' => 'required|string|max:20',
             'password' => 'nullable|string|min:6|confirmed', // Ensure passwords match
             'status' => 'required|in:active,inactive',
@@ -105,17 +105,17 @@ class TeacherController extends Controller implements TeacherRepositoryInterface
 
         
     
-        if ($teacher) {
+        if ($academic) {
             // Update the playlist with validated data
-            $teacher->update($validatedData);
+            $academic->update($validatedData);
     
             // Redirect with a success message
-            return redirect()->route('admin.teachers.index')->with('success', 'Teacher updated successfully.');
+            return redirect()->route('admin.academics.index')->with('success', 'Academic updated successfully.');
         } 
         
         else {
             // Handle the case where the playlist is not found
-            return redirect()->route('admin.teachers.index')->with('error', 'Course not found.');
+            return redirect()->route('admin.academics.index')->with('error', 'Course not found.');
         }
     }
 }

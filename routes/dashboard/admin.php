@@ -40,6 +40,8 @@ Route::group(
 
             Route::resource('teachers', Dashboard\TeacherController::class);
 
+            Route::resource('academics', Dashboard\AcademicController::class);
+
             Route::get('/courses/{courseId}/playlists', [Dashboard\VideoController::class, 'getPlaylistsByCourse']);
 
             Route::get('/settings', [Dashboard\SettingController::class, 'index'])->name('settings');

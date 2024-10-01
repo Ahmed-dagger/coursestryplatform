@@ -14,5 +14,6 @@ return [
     'settings'    => 'Settings',
     'teachers'    => 'Teachers',
     'course'    => 'Course',
+    'academics'    => 'Academics',
 
 ];

@@ -64,4 +64,13 @@
     </a>
 </div>
 
+<div class="menu-item">
+    <a class="menu-link {{ request()->routeIS('admin.academics.index') ? 'active' : '' }}" href="{{route('admin.academics.index')}}">
+        <span class="menu-icon">
+            <i class="bi bi-grid fs-3"></i>
+        </span>
+        <span class="menu-title">{{ trans('dashboard/admin.academics') }}</span>
+    </a>
+</div>
+
 

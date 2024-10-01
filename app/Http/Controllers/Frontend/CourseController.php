@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class CourseController extends Controller
     public function __invoke() {
 
         $courses = Course::whenSearch(request()->search)->paginate(15);
+        $categories = Category::all();
 
-        return view('frontend.courses', ['pageTitle' => trans('site/site.course_page_title')],compact('courses'));
+        return view('frontend.courses', ['pageTitle' => trans('site/site.course_page_title')],compact('courses','categories'));
     }
 
     public function show($id)
@@ -33,6 +35,7 @@ class CourseController extends Controller
         $totalVideos = $course->playlists->sum(function ($playlist) {
             return $playlist->videos->count();
         });
+
 
 
 

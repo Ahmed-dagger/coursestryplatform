@@ -25,6 +25,8 @@ Route::group(
             Route::get('/', Frontend\FrontendController::class)->name('home');
             Route::get('/courses' , Frontend\CourseController::class )->name('courses');
             Route::get('/courses/{id}' , [Frontend\CourseController::class , 'show'] )->name('courses.show');
+            Route::get('/academies' , Frontend\AcademiesController::class )->name('academies');
+            Route::get('/academies/{id}' , [Frontend\AcademiesController::class , 'show'] )->name('academies.show');
             Route::get('/about' , [Frontend\AboutContactController::class , 'About'])->name('About');
             Route::get('/contact' , [Frontend\AboutContactController::class , 'Contact'])->name('Contact');
             Route::get('/cart' , Frontend\CartController::class )->name('Cart');

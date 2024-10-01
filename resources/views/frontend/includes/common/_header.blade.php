@@ -50,7 +50,10 @@
                         <li class="nav-item {{ request()->routeIs('site.courses') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('site.courses') }}">{{ __('site/site.course_page_title')}}</a>
                         </li>
-                        <li class="nav-item dropdownmenu">
+                        <li class="nav-item {{ request()->routeIs('site.academies') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('site.academies') }}">{{ __('site/site.academy_page_title')}}</a>
+                        </li>
+                        {{-- <li class="nav-item dropdownmenu">
                             <a class="nav-link buttonDrop" href="#">
                                 {{ __('site/site.Other_page_title')}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -63,7 +66,7 @@
                                 <a class="text-center py-2" id="middle" href="ErrorPage.html">Our best</a>
                                 <a class="text-center pb-2" id="bottom" href="ErrorPage.html">Subulway</a>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="nav-item  {{ request()->routeIs('site.About') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('site.About') }}">
                                 {{ __('site/site.About_page_title')}}
@@ -138,14 +141,17 @@
                         <li class="MenuItem {{ request()->routeIs('site.courses') ? 'active' : '' }}"><a
                                 href="{{ route('site.courses') }}" class="linkItem">{{ __('site/site.courses_page_title')}}</a>
                         </li>
-                        <li class="MenuItem"><a href="#otherSubmenu" data-bs-toggle="collapse"
+                        <li class="MenuItem {{ request()->routeIs('site.academies') ? 'active' : '' }}"><a
+                            href="{{ route('site.academies') }}" class="linkItem">{{ __('site/site.academy_page_title')}}</a>
+                    </li>
+                        {{-- <li class="MenuItem"><a href="#otherSubmenu" data-bs-toggle="collapse"
                                 aria-expanded="false" class="dropdown-toggle linkItem">Other</a>
                             <ul class="collapse list-unstyled" id="otherSubmenu">
                                 <li><a href="ErrorPage.html" class="linkItem">Submenu 1</a></li>
                                 <li><a href="ErrorPage.html" class="linkItem">Submenu 2</a></li>
                                 <li><a href="ErrorPage.html" class="linkItem">Submenu 3</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="MenuItem {{ request()->routeIS('site.About') ? 'active' : '' }}"><a href="{{ route('site.About') }}"
                                 class="linkItem">{{ __('site/site.About_page_title')}}</a></li>
                         <li class="MenuItem {{ request()->routeIS('site.Contact') ? 'active' : '' }}"><a

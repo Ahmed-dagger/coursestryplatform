@@ -1,37 +1,40 @@
 <div class="d-flex">
-    @if ($admin->deleted_at == null)
-        <!-- Trigger the delete confirmation modal -->
-        <button type="button" class="btn btn-danger mx-1" onclick="confirmDeleteAdmin({{ $admin->id }})">
-            {{ trans('dashboard/general.delete') }}
-        </button>
 
-        <!-- Hidden delete form (this will be submitted upon confirmation) -->
-        <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.destroy', $admin->id) }}" method="post" style="display: none;">
+
+    @if ($academic->deleted_at == null)
+    <button class="btn btn-danger mx-1" onclick="confirmDeleteAdmin({{ $academic->id }})">{{ trans('dashboard/general.delete')}}</button>
+
+        <form id="delete-form-{{ $academic->id }}" action="{{ route('admin.academics.destroy', $academic->id) }}" method="post">
             @csrf
             @method('DELETE')
         </form>
     @else
-        <form action="{{ route('admin.restore', $admin->id) }}" method="post">
+        <form action="{{ route('admin.restore',$academic->id) }}" method="post">
             @csrf
-            <button class="btn btn-success mx-1">{{ trans('dashboard/general.restore') }}</button>
+
+            <button class="btn btn-danger mx-1">{{ trans('dashboard/general.restore')}}</button>
+
+
         </form>
     @endif
 
-    <a href="{{ route('admin.admins.edit', $admin->id) }}">
-        <button class="btn btn-info">{{ trans('dashboard/general.update') }}</button>
-    </a>
+    <form action="{{ route('admin.academics.edit',$academic->id) }}">
+        <button class="btn btn-info">{{ trans('dashboard/general.update')}}</button>
+
+    </form>
+
 </div>
 
-<!-- Delete Confirmation Modal -->
+
 <div class="modal fade" id="deleteAdminModal" tabindex="-1" aria-labelledby="deleteAdminModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteAdminModalLabel">Delete Admin</h5>
+                <h5 class="modal-title" id="deleteAdminModalLabel">Delete Teacher</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this admin?
+                Are you sure you want to delete this teacher?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -42,9 +45,8 @@
 </div>
 
 
-<script>
-
-    let selectedAdminId = null; // Variable to store the selected admin ID
+    <script>
+       let selectedAdminId = null; // Variable to store the selected admin ID
 
 // Function to trigger the delete confirmation modal
 function confirmDeleteAdmin(adminId) {
@@ -60,4 +62,5 @@ $('#confirmDeleteAdminBtn').on('click', function() {
         $('#deleteAdminModal').modal('hide'); // Hide the modal after submission
     }
 });
-</script>
+    </script>
+
