@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\InteractsWithTime;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
+    use HasFactory,InteractsWithMedia,SoftDeletes;
 
     protected $table = 'courses';
     protected $fillable = ['name','category_id','Price','desc','teacher_id','category_id'];
