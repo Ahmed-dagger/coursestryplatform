@@ -10,6 +10,7 @@ return [
     'courses'     => 'Courses',
     'price'       => 'Price',
     'playlist'    => 'Playlist',
-    'videos'    => 'videos',
-    'settings'    => 'settings',
+    'videos'    => 'Videos',
+    'settings'    => 'Settings',
+    'teachers'    => 'Teachers',
 ];

@@ -117,15 +117,56 @@
             <div class="card-body">
                 <div class="form-group row" class="my-2">
                     <div class="col-lg-6">
-                        <label class="mb-2">{{ __('dashboard/forms.Email') }}</label>
+                        <label class="mb-2">{{ __('dashboard/forms.email') }}</label>
                         <input name="email" type="text" class="form-control form-control-solid" placeholder="Email" value="{{ old('email', setting('email')) }}"/>
-                        <span class="form-text text-muted">Email</span>
+                        <span class="form-text text-muted">Enter the Email appear in header</span>
                     </div>
                     <div class="col-lg-6">
 
                         <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.phone') }}</label>
                         <input name="phone" type="text" class="form-control form-control-solid" placeholder="Phone" value="{{ old('phone', setting('phone')) }}"/>
-                        <span class="form-text text-muted">phone</span>
+                        <span class="form-text text-muted">enter the Phone appear in header</span>
+                    </div>
+                </div>
+                <div class="form-group row" class="my-2">
+                    <div class="col-lg-6">
+                        <label class="mb-2">{{ __('dashboard/forms.location') }}</label>
+                        <input name="location" type="text" class="form-control form-control-solid" placeholder="location" value="{{ old('location', setting('location')) }}"/>
+                        <span class="form-text text-muted">Enter the location appear in contact</span>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.hotline') }}</label>
+                        <input name="hotline" type="text" class="form-control form-control-solid" placeholder="hotline" value="{{ old('hotline', setting('hotline')) }}"/>
+                        <span class="form-text text-muted">enter the hotline appear in header</span>
+                    </div>
+                </div>
+
+                <div class="form-group row" class="my-2">
+                    <div class="col-lg-6">
+                        <label class="mb-2">{{ __('dashboard/forms.Facebook') }}</label>
+                        <input name="Facebook" type="text" class="form-control form-control-solid" placeholder="Facebook Link" value="{{ old('Facebook', setting('Facebook')) }}"/>
+                        <span class="form-text text-muted">Enter the Facebook link</span>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.Instagram') }}</label>
+                        <input name="Instagram" type="text" class="form-control form-control-solid" placeholder="Instagram Link" value="{{ old('Instagram', setting('Instagram')) }}"/>
+                        <span class="form-text text-muted">Enter the Instagram link</span>
+                    </div>
+                </div>
+
+                <div class="form-group row" class="my-2">
+                    <div class="col-lg-6">
+                        <label class="mb-2">{{ __('dashboard/forms.LinkedIn') }}</label>
+                        <input name="LinkedIn" type="text" class="form-control form-control-solid" placeholder="LinkedIn Link" value="{{ old('LinkedIn', setting('LinkedIn')) }}"/>
+                        <span class="form-text text-muted">Enter the LinkedIn link</span>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <label for="exampleTextarea" class="mb-2">{{ __('dashboard/forms.Twitter') }}</label>
+                        <input name="Twitter" type="text" class="form-control form-control-solid" placeholder="Twitter Link" value="{{ old('Twitter', setting('Twitter')) }}"/>
+                        <span class="form-text text-muted">Enter the Twitter link</span>
                     </div>
                 </div>
 

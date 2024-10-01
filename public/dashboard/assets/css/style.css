@@ -762,6 +762,7 @@ body {
 /*? Courses page Styling*/
 
 .SubHeader {
+    background-image: url(/dashboard/assets/img/Subheader.jpeg);
     background-size: cover;
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.7);
@@ -1362,6 +1363,140 @@ a:hover {
 
 #file-input::file-selector-button:hover {
     background: #a50d0d;
+}
+
+/** content page styling*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+.videoplaylist-container {
+    max-width: 1200px;
+    margin: 100px auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 12px;
+}
+
+@media (max-width: 1200px) {
+    .videoplaylist-container {
+        margin: 0;
+    }
+}
+
+.main-video-container {
+    flex: 1 1 700px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 15px;
+}
+
+.main-video {
+    margin-bottom: 7px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.main-video__title {
+    font-size: 20px;
+    color: #444;
+}
+
+@media (max-width: 450px) {
+    .main-video__title {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
+.video-list-container {
+    flex: 1 1 350px;
+    height: 485px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    border: solid 2px #000;
+}
+
+.video-list-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.video-list-container::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.video-list-container::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.list:hover {
+    background-color: #444;
+}
+
+.list:hover .list__title {
+    color: #fff;
+}
+
+.list:last-child {
+    margin-bottom: 0;
+}
+
+.list.active {
+    background-color: #444;
+}
+
+.list.active .list__title {
+    color: #fff;
+}
+
+@media (max-width: 450px) {
+    .list {
+        flex-flow: column;
+        gap: 10px;
+    }
+}
+
+.list__video {
+    width: 100px;
+    border-radius: 5px;
+}
+
+@media (max-width: 450px) {
+    .list__video {
+        width: 100%;
+    }
+}
+
+.list__title {
+    font-size: 17px;
+    color: #444;
+}
+
+@media (max-width: 450px) {
+    .list__title {
+        font-size: 15px;
+        text-align: center;
+    }
 }
 
 /*? mobile size layout*/

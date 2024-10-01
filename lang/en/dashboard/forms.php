@@ -16,4 +16,10 @@ return [
     'price'       => 'Price',
     'Submit'       => 'Submit',
     'Reset'       => 'Reset',
+    'location'       => 'Location',
+    'hotline'       => 'Hotline',
+    'Facebook'       => 'Facebook',
+    'Instagram'       => 'Instagram',
+    'LinkedIn'       => 'LinkedIn',
+    'Twitter'       => 'Twitter',
 ];

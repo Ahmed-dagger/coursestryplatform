@@ -4,12 +4,12 @@
         <div class="container d-flex justify-content-between">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
-                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">01001311364</span>
+                    <i class="fa fa-phone tph-icons mt-0 mx-1"></i> <span class="text-dark infos">{{ setting('phone') }}</span>
                 </div>
                 <div class="col-md-6 d-flex align-items-center infoContainer">
                     <img width="16" height="16" class="mt-0 mx-1"
                         src="https://img.icons8.com/material-sharp/128/DB0000/mail.png" alt="mail" />
-                    <span class="text-dark infos">subul@mail.org</span>
+                    <span class="text-dark infos">{{ setting('email') }}</span>
                 </div>
 
 
@@ -24,10 +24,10 @@
                 </div>
 
                 <div class="container justify-content-center d-flex col-md-4">
-                    <a href="#" class="mx-1"><i class="fab fa-twitter icons"></i></a>
-                    <a href="#" class="mx-1"><i class="fab fa-facebook-f icons"></i></a>
-                    <a href="#" class="mx-1"><i class="fab fa-instagram icons"></i></a>
-                    <a href="#" class="mx-1"><i class="fab fa-linkedin-in icons"></i></a>
+                    <a href="{{ setting('Facebook') }}" class="mx-1"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ setting('Instagram') }}" class="mx-1"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ setting('LinkedIn') }}" class="mx-1"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="{{ setting('Twitter') }}" class="mx-1"><i class="fab fa-twitter"></i></a>
                 </div>
 
             </div>

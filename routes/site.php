@@ -28,6 +28,7 @@ Route::group(
             Route::get('/about' , [Frontend\AboutContactController::class , 'About'])->name('About');
             Route::get('/contact' , [Frontend\AboutContactController::class , 'Contact'])->name('Contact');
             Route::get('/cart' , Frontend\CartController::class )->name('Cart');
+            Route::get('/courses/{id}/content' , Frontend\courseContentController::class )->name('courseContent');
         });
 
         require __DIR__ . '/auth.php';

@@ -3,13 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academic;
+use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class AboutContactController extends Controller
 {
     public function About()
-    {   
-        return view('frontend.About', ['pageTitle' => trans('site/site.About_page_title')]);
+    { 
+        $courses = Course::count();
+        $teachers = Teacher::count();
+        $academies = Academic::count();
+
+        return view('frontend.About', ['pageTitle' => trans('site/site.About_page_title')], compact(['courses','teachers','academies']));
     }
 
     public function Contact()

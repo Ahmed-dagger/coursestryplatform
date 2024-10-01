@@ -40,7 +40,7 @@
                     <img class="mb-2" width="30" height="30"
                         src="https://img.icons8.com/ios-filled/128/D30000/marker.png" alt="marker" />
                     <span class="TitleOfIcon mt-3">Location</span> <br>
-                    <p class="text-secondary">Saudi-Arabyia, Ryidah, souq Eldaira</p>
+                    <p class="text-secondary">{{ setting('location') }}</p>
 
                 </div>
                 <hr>
@@ -48,8 +48,8 @@
                     <img class="mb-2" width="30" height="30"
                         src="https://img.icons8.com/ios-glyphs/128/D30000/iphone14-pro.png" alt="marker" />
                     <span class="TitleOfIcon mt-3">Phone</span> <br>
-                    <p class="text-secondary">Phone Number: 00966123456789</p>
-                    <p class="text-secondary">Hotline: 20493569</p>
+                    <p class="text-secondary">Phone Number: {{ setting('phone') }}</p>
+                    <p class="text-secondary">Hotline: {{ setting('hotline') }}</p>
 
                 </div>
                 <hr>
@@ -57,8 +57,7 @@
                     <img class="mb-2" width="30" height="30"
                         src="https://img.icons8.com/ios-filled/128/D30000/marker.png" alt="marker" />
                     <span class="TitleOfIcon mt-3">E-mail</span> <br>
-                    <p class="text-secondary">Email@emal.com</p>
-                    <p class="text-secondary">example@origin.com</p>
+                    <p class="text-secondary">{{ setting('email') }}</p>
 
                 </div>
 

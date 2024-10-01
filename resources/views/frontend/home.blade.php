@@ -13,7 +13,7 @@
                         <p>{{ __('content/home-content.home_banner_subtitle') }}</p>
                     </div>
                     <div class="container mt-4">
-                        <a href=""><button class="StartButton text-center">
+                        <a href="{{ route('site.courses') }}"><button class="StartButton text-center">
                                 {{ __('content/home-content.home_banner_start_button') }} </button></a> <a href="">
                             <button class="WVideo text-center"> {{ __('content/home-content.home_banner_video_button') }}
                             </button></a>
@@ -21,7 +21,7 @@
                     <div class="container py-2">
                         <button class="text-center USersBtn">170+ <br> <span
                                 class="text-danger USersTitle">{{ __('content/home-content.home_banner_users_number') }}</span></button>
-                        <button class="text-center USersBtn">940+ <br> <span
+                        <button class="text-center USersBtn">{{ count($courses) }} <br> <span
                                 class="text-danger USersTitle">{{ __('content/home-content.home_banner_Courses_number') }}</span></button>
 
                     </div>

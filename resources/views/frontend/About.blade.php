@@ -54,7 +54,7 @@
             <div class="container justify-content-center text-center">
                 <img src="{{ asset('dashboard/assets/img/coursesIcon.png') }}" class="InfoCounterAbouticon" alt="">
                 <h5 class="my-4 text-center text-danger">Courses</h5>
-                <h5 class="text-danger text-center counter" data-count="1205">0</h5>
+                <h5 class="text-danger text-center counter" data-count="{{ $courses }}">0</h5>
 
 
             </div>
@@ -62,8 +62,8 @@
         <div class=" col-sm-2 justify-content-center mx-5 my-5 text-center">
             <div class="container justify-content-center text-center">
                 <img src="{{ asset('dashboard/assets/img/studentsbrainicon.png') }}" alt="" class="InfoCounterAbouticon">
-                <h5 class="my-4 text-center text-danger">Students</h5>
-                <h5 class="text-danger text-center counter" data-count="251300">0</h5>
+                <h5 class="my-4 text-center text-danger">Academies</h5>
+                <h5 class="text-danger text-center counter" data-count="{{ $academies }}">0</h5>
 
             </div>
         </div>
@@ -71,7 +71,7 @@
             <div class="container justify-content-center text-center">
                 <img src="{{ asset('dashboard/assets/img/tutorsicon.png') }}" alt="" class="InfoCounterAbouticon">
                 <h5 class="my-4 text-center text-danger">Tutors</h5>
-                <h4 class="text-danger text-center counter" data-count="20">0</h4>
+                <h4 class="text-danger text-center counter" data-count="{{ $teachers }}">0</h4>
 
             </div>
         </div>
@@ -84,6 +84,7 @@
 
 </div>
 
+{{-- 
 <div class="container d-flex">
     <div class="row align-items-center">
         <div class="col-sm-3 align-items-center">
@@ -296,7 +297,7 @@
 
     </div>
 
-</div>
+</div> --}}
 
 
 
@@ -319,7 +320,7 @@
     </div>
 
 </div>
-
+{{-- 
 <div class="container-fluid TeamMembers">
     <div class="container justify-content-between d-flex my-4">
         <h5>Meet our team members</h5>
@@ -412,7 +413,7 @@
 
         </div>
     </div>
-</div>
+</div> --}}
     @push('js')
     @endpush
 @endsection

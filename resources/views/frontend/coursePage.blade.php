@@ -141,19 +141,13 @@
                                         </div>
 
                                         <div class="container">
+                                                <a href="{{ route('site.courseContent' ,  $course -> id  ) }}" class="text-decoration-none">
 
-                                            <form action="" method="POST">
-
-                                                @csrf
-                                                <button class="LogINBtn" style="font-weight: 700;">
-                                                    <img class="mb-1" width="20" height="20"
-                                                        src="https://img.icons8.com/ios/128/ffffff/shopping-bag--v1.png"
-                                                        alt="shopping-bag--v1" />
-                                                    Buy This Course
-                                                </button>
-                                            </form>
-
-                                        </div>
+                                                    <button class="LogINBtn" style="font-weight: 700;">
+                                                        Enroll Now
+                                                    </button>
+                                                </a>
+                                            </div>
 
                                         <div class="mt-3">
                                             <h4>
