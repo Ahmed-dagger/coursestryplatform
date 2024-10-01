@@ -22,6 +22,19 @@ class Course extends Model implements HasMedia
              ->height(300);
     }
 
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search, function ($q) use ($search) {
+            return $q->where('name', 'like', "%$search%");
+        });
+
+    }// end of scopeWhenSearch
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class, 'course_id');
+    }
+
     public function playlists()
     {
         return $this->hasMany(Playlist::class);

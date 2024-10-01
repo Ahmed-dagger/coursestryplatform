@@ -36,74 +36,7 @@
             <a href="../../demo13/dist/account/overview.html" class="px-5 menu-link">My Profile</a>
         </div>
         <!--end::Menu item-->
-        <!--begin::Menu item-->
-        <div class="px-5 menu-item">
-            <a href="../../demo13/dist/pages/projects/list.html" class="px-5 menu-link">
-                <span class="menu-text">My Projects</span>
-                <span class="menu-badge">
-                    <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-                </span>
-            </a>
-        </div>
-        <!--end::Menu item-->
-        <!--begin::Menu item-->
-        <div class="px-5 menu-item" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-            <a href="#" class="px-5 menu-link">
-                <span class="menu-title">My Subscription</span>
-                <span class="menu-arrow"></span>
-            </a>
-            <!--begin::Menu sub-->
-            <div class="py-4 menu-sub menu-sub-dropdown w-175px">
-                <!--begin::Menu item-->
-                <div class="px-3 menu-item">
-                    <a href="../../demo13/dist/account/referrals.html" class="px-5 menu-link">Referrals</a>
-                </div>
-                <!--end::Menu item-->
-                <!--begin::Menu item-->
-                <div class="px-3 menu-item">
-                    <a href="../../demo13/dist/account/billing.html" class="px-5 menu-link">Billing</a>
-                </div>
-                <!--end::Menu item-->
-                <!--begin::Menu item-->
-                <div class="px-3 menu-item">
-                    <a href="../../demo13/dist/account/statements.html" class="px-5 menu-link">Payments</a>
-                </div>
-                <!--end::Menu item-->
-                <!--begin::Menu item-->
-                <div class="px-3 menu-item">
-                    <a href="../../demo13/dist/account/statements.html"
-                        class="px-5 menu-link d-flex flex-stack">Statements
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                            title="View your statements"></i></a>
-                </div>
-                <!--end::Menu item-->
-                <!--begin::Menu separator-->
-                <div class="my-2 separator"></div>
-                <!--end::Menu separator-->
-                <!--begin::Menu item-->
-                <div class="px-3 menu-item">
-                    <div class="px-3 menu-content">
-                        <label class="form-check form-switch form-check-custom form-check-solid">
-                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked"
-                                name="notifications" />
-                            <span class="form-check-label text-muted fs-7">Notifications</span>
-                        </label>
-                    </div>
-                </div>
-                <!--end::Menu item-->
-            </div>
-            <!--end::Menu sub-->
-        </div>
-        <!--end::Menu item-->
-        <!--begin::Menu item-->
-        <div class="px-5 menu-item">
-            <a href="../../demo13/dist/account/statements.html" class="px-5 menu-link">My
-                Statements</a>
-        </div>
-        <!--end::Menu item-->
-        <!--begin::Menu separator-->
-        <div class="my-2 separator"></div>
-        <!--end::Menu separator-->
+
         <!--begin::Menu item-->
         <div class="px-5 menu-item" data-kt-menu-trigger="hover" data-kt-menu-placement="{{leftStartDirectionClass()}}">
             <a href="#" class="px-5 menu-link">
@@ -144,55 +77,33 @@
         </div>
         <!--end::Menu item-->
         <!--begin::Menu item-->
-        <div class="px-5 my-1 menu-item">
-            <a href="../../demo13/dist/account/settings.html" class="px-5 menu-link">Account
-                Settings</a>
-        </div>
-        <!--end::Menu item-->
-        <!--begin::Menu item-->
         <div class="px-5 menu-item">
-            @if(admin_guard()->check())
-                <form method="POST" action="{{ route('admin.logout') }}">
+        @php
+            $guards = [
+                'admin' => admin_guard(),
+                'teacher' => teacher_guard(),
+                'academic' => academic_guard(),
+            ];
+        @endphp
+
+        @foreach($guards as $role => $guard)
+            @if($guard->check())
+                <form method="POST" action="{{ route("{$role}.logout") }}">
                     @csrf
-                    <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="px-5 menu-link">
+                    <a href="{{ route("{$role}.logout") }}"
+                       onclick="event.preventDefault(); this.closest('form').submit();"
+                       class="px-5 menu-link">
                         Sign Out
                     </a>
                 </form>
             @endif
-            @if(teacher_guard()->check())
-                <form method="POST" action="{{ route('teacher.logout') }}">
-                    @csrf
-                    <a href="{{ route('teacher.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="px-5 menu-link">
-                        Sign Out
-                    </a>
-                </form>
-            @endif
-            @if(academic_guard()->check())
-                <form method="POST" action="{{ route('academic.logout') }}">
-                    @csrf
-                    <a href="{{ route('academic.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="px-5 menu-link">
-                        Sign Out
-                    </a>
-                </form>
-            @endif
+        @endforeach
         </div>
         <!--end::Menu item-->
         <!--begin::Menu separator-->
         <div class="my-2 separator"></div>
         <!--end::Menu separator-->
-        <!--begin::Menu item-->
-        <div class="px-5 menu-item">
-            <div class="px-5 menu-content">
-                <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
-                    for="kt_user_menu_dark_mode_toggle">
-                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode"
-                        id="kt_user_menu_dark_mode_toggle" data-kt-url="../../demo13/dist/index.html" />
-                    <span class="pulse-ring ms-n1"></span>
-                    <span class="text-gray-600 form-check-label fs-7">Dark Mode</span>
-                </label>
-            </div>
-        </div>
-        <!--end::Menu item-->
+
     </div>
     <!--end::Menu-->
     <!--end::Menu wrapper-->

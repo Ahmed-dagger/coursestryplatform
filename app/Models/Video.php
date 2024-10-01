@@ -11,6 +11,15 @@ class Video extends Model
 
     protected $guarded=[];
 
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search, function ($q) use ($search) {
+            return $q->where('name', 'like', "%$search%");
+        });
+
+    }// end of scopeWhenSearch
+
+
     public function playlist()
     {
         return $this->belongsTo(Playlist::class,'playlist_id');
