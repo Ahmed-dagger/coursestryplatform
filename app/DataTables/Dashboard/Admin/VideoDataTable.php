@@ -58,8 +58,11 @@ class VideoDataTable extends BaseDataTable
             ->editColumn('created_at', function (Video $video) {
                 return $this->formatBadge($this->formatDate(value: $video->created_at));
             })
-            ->editColumn('updated_at', function (Video $video) {
-                return $this->formatBadge($this->formatDate($video->updated_at));
+            ->editColumn('course', function (Video $video) {
+                return $video->getCourseName();
+            })
+            ->editColumn('playlist', function (Video $video) {
+                return $video->playlist->name;
             })
             ->editColumn('deleted_at', function (Video $video) {
                 return $this->formatBadge($this->formatDate($video->deleted_at));
@@ -81,9 +84,10 @@ class VideoDataTable extends BaseDataTable
 
         return [
             ['name' => 'id', 'data' => 'id', 'title' => '#', 'orderable' => false, 'searchable' => false],
-            ['name' => 'name', 'data' => 'title', 'title' => trans('dashboard/admin.name')],
+            ['name' => 'name', 'data' => 'name', 'title' => trans('dashboard/admin.name')],
+            ['name' => 'course', 'data' => 'course', 'title' => trans('dashboard/admin.course')],
+            ['name' => 'playlist', 'data' => 'playlist', 'title' => trans('dashboard/admin.playlist')],
             ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('dashboard/general.created_at'), 'orderable' => false, 'searchable' => false],
-            ['name' => 'updated_at', 'data' => 'updated_at', 'title' => trans('dashboard/general.updated_at'), 'orderable' => false, 'searchable' => false],
             ['name' => 'deleted_at', 'data' => 'deleted_at', 'title' => trans('dashboard/general.deleted_at'), 'orderable' => false, 'searchable' => false],
             ['name' => 'action', 'data' => 'action', 'title' => trans('dashboard/general.actions'), 'orderable' => false, 'searchable' => false],
         ];

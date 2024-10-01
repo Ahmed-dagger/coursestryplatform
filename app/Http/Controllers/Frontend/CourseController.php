@@ -11,7 +11,7 @@ class CourseController extends Controller
 {
     public function __invoke() {
 
-        $courses = Course::all();
+        $courses = Course::whenSearch(request()->search)->paginate(15);
 
         return view('frontend.courses', ['pageTitle' => trans('site/site.course_page_title')],compact('courses'));
     }
@@ -23,7 +23,7 @@ class CourseController extends Controller
             'playlists.videos', // Fetch playlists and their related videos
             'category', // Assuming you have a relatedCourses relationship defined
         ])->findOrFail($id);
-    
+
         // Get the teacher and other related data directly from the $course object
         $teacher = $course->teacher;
         $courseCount = $teacher->course->count(); // Assuming 'courses' relationship exists on the teacher model
@@ -33,7 +33,7 @@ class CourseController extends Controller
         $totalVideos = $course->playlists->sum(function ($playlist) {
             return $playlist->videos->count();
         });
-        
+
 
 
         return view(

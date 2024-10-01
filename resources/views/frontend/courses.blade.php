@@ -56,7 +56,6 @@
                         <div class="search-container text-right d-flex mb-2">
 
                             <form class="search-container" action="" method="GET">
-                                @csrf
                                 <input value="" type="text" class="search-input"
                                     placeholder="Look for Courses" name="search">
                                 <button class="search-button mx-2" type="submit">
@@ -96,13 +95,13 @@
                         </div>
                     @endforeach
                 @endif
-            
+
                 <!-- Pagination -->
-            
+
             </div>
 
 
-            
+
 
 
             <!-- Content Sections -->

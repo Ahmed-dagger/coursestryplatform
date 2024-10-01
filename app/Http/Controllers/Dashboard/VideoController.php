@@ -28,6 +28,7 @@ class VideoController extends Controller implements VideoRepositoryInterface
 
     public function create()
     {
+        Video::whereNull('playlist_id')->whereNull('course_id')->delete();
         $playlists = Playlist::get();
         $courses = Course::get();
         $video = Video::create([]);
@@ -78,10 +79,10 @@ class VideoController extends Controller implements VideoRepositoryInterface
     public function destroy(Video $video)
     {
         Storage::disk('local')->delete($video->path);
-        Storage::disk('local')->deleteDirectory('public/movies/' . $video->id);
+        Storage::disk('local')->deleteDirectory('public/videos/' . $video->id);
         $video->delete();
         session()->flash('success', 'Data deleted successfully');
-        return redirect()->route('dashboard.movies.index');
+        return redirect()->route('admin.videos.index');
 
     }//end of destroy
 

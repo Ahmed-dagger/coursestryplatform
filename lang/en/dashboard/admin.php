@@ -13,4 +13,6 @@ return [
     'videos'    => 'Videos',
     'settings'    => 'Settings',
     'teachers'    => 'Teachers',
+    'course'    => 'Course',
+
 ];
