@@ -42,7 +42,7 @@
             @foreach ($academies as $academy)
 
             <div class="col-sm justify-content-center text-center">
-                <img class="rounded-circle img-fluid MembersImg" src="{{ $academy->getdefImageUrl($academy-> name ) }}" alt="">
+                <a href="{{ route('site.academies.show', $academy->id ) }}"><img class="rounded-circle img-fluid MembersImg" src="{{ $academy->getdefImageUrl($academy-> name ) }}" alt=""></a>
                 <div class="container my-3">
                    <a class="text-decoration-none text-dark" href="{{ route('site.academies.show', $academy->id ) }}"> <h5 class="text-dark text-center">{{ $academy-> name }}</h5></a>
 
