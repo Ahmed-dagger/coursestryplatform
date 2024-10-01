@@ -22,6 +22,15 @@ class TeacherController extends Controller implements TeacherRepositoryInterface
         return $this->teacherInterface->index($this->teacherDataTable);
     }
 
+    public function show($uuid) {
+        $teacher = Teacher::whereHas('profile', function($query) use ($uuid) {
+            $query->whereUuid($uuid);
+        })->firstOrFail();
+        //return view('admin.show', compact('admin'));
+        return $teacher;
+    }
+
+
     public function create()
     {
         return view('dashboard.Admin.teachers.create', ['pageTitle' => trans('dashboard/admin.teachers')]);
