@@ -25,6 +25,17 @@ class Academic extends Authenticatable implements JWTSubject {
         return $this->hasOne(related:AcademicProfile::class, foreignKey:'academic_id');
     }
 
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class ,'academy_id');
+    }
+
+    
+    public function categories()
+    {
+        return $this->hasMany(Category::class,'academy_id');
+    }
+
     public function getdefImageUrl($name)
     {
         return "https://eu.ui-avatars.com/api/?name=$name&size=250";

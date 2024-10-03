@@ -10,7 +10,7 @@ class Teacher extends Authenticatable implements JWTSubject {
 
     protected $table = 'teachers';
 
-    protected $fillable = ['name','email','password','phone', 'status'];
+    protected $fillable = ['name','email','password','phone', 'status','academy_id'];
 
     protected $hidden = ['password','remember_token',];
 
@@ -30,8 +30,19 @@ class Teacher extends Authenticatable implements JWTSubject {
         return $this->hasOne(related:TeacherProfile::class, foreignKey:'teacher_id');
     }
 
+    public function academies()
+    {
+        return $this->belongsTo(Academic::class, 'academy_id');
+    }
+
     public function course()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function getdefImageUrl($name)
+    {
+        return "https://eu.ui-avatars.com/api/?name=$name&size=250";
+
     }
 }

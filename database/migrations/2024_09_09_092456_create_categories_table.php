@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->integer('parent')->unsigned()->nullable();
+            $table->foreignId('academy_id')->nullable()->references('id')->on('academics')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

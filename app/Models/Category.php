@@ -13,7 +13,7 @@ class Category extends Model implements TranslatableContract
 
     protected $table = 'categories';
     // 2. To add translation methods
-    protected $fillable =['parent'];
+    protected $fillable =['parent','academy_id'];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['name','description'];
     
@@ -23,9 +23,19 @@ class Category extends Model implements TranslatableContract
         return $this->hasMany(CategoryTranslation::class);
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent');
+    }
+
+    public function academies()
+    {
+        return $this->belongsTo(Academic::class, 'academy_id');
     }
 
     // Get the children categories

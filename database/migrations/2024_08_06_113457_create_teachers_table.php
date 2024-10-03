@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone', 20)->nullable();
             $table->enum('status', ['active', 'inactive']);
+            $table->foreignId('academy_id')->nullable()->references('id')->on('academics')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

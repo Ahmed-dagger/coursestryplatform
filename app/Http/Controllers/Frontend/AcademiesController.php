@@ -10,19 +10,26 @@ use Illuminate\Http\Request;
 
 class AcademiesController extends Controller
 {
-    public function __invoke() {
-
+    public function __invoke()
+    {
         $academies = Academic::all();
 
-        return view('frontend.Academies', ['pageTitle' => trans('site/site.academy_page_title')],compact('academies'));
+        return view('frontend.Academies', ['pageTitle' => trans('site/site.academy_page_title')], compact('academies'));
     }
 
     public function show($id)
     {
-        $academy = Academic::findOrFail($id);
+        $academy = Academic::with(['categories.courses', 'teachers'])->findOrFail($id);
 
-        return view('frontend.academiesProfile', ['pageTitle' => trans('site/site.academy_page_title')],compact('academy'));
+        // Retrieve the related data from the loaded relationships
+        $teachers = $academy->teachers; // Already eager-loaded
+        $categories = $academy->categories; // Already eager-loaded
 
+        // You can get the courses by looping through categories
+        $courses = $categories->flatMap(function ($category) {
+            return $category->courses; // This retrieves courses for each category
+        });
 
+        return view('frontend.academiesProfile', ['pageTitle' => trans('site/site.academy_page_title')], compact('academy', 'categories', 'teachers', 'courses'));
     }
 }
